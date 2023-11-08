@@ -1,11 +1,10 @@
-package es.uah.peliculas.dao;
+package es.uah.peliculas.service;
 
 import es.uah.peliculas.model.Actor;
 
 import java.util.List;
-import java.util.Map;
 
-public interface IActoresDAO{
+public interface IActoresService {
 
     List<Actor> buscarTodos();
     Actor buscarActorPorId(Integer idActor);
@@ -14,7 +13,5 @@ public interface IActoresDAO{
     void eliminarActor(Integer idActor);
     void actualizarActor(Actor actor);
     void anadirActorAPelicula(Integer idActor, Integer idPelicula);
-
-
 
 }

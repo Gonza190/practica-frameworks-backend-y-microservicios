@@ -44,6 +44,16 @@ public class ActorDAOImp implements IActoresDAO{
         actoresJPA.save(actor);
     }
 
+    public void eliminarActor(Integer idActor){
+        Optional<Actor> optional = actoresJPA.findById(idActor);
+        if(optional.isPresent()){
+            Actor actor = optional.get();
+            List<Pelicula> peliculas = actor.getPeliculas();
+            for (Pelicula pelicula: peliculas){
+                peliculas.remove(actor);
+            }
+        }
+    }
     @Override
     public void actualizarActor(Actor actor) {
         actoresJPA.save(actor);
