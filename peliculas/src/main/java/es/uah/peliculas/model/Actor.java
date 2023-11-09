@@ -25,11 +25,9 @@ public class Actor {
 
     //Relacion @ManyToMany hecha a mano
     @ManyToMany
-    @JoinTable(name="peliculasActores", joinColumns = {
-            @JoinColumn(name = "pelicula_id", referencedColumnName = "id")
-    },inverseJoinColumns = {
-            @JoinColumn(name = "actor_id", referencedColumnName = "id")
-    })
+    @JoinTable(name="peliculasActores",
+            joinColumns = {@JoinColumn(name = "actor_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "pelicula_id", referencedColumnName = "id")})
     @JsonIgnoreProperties("actores")
     private List<Pelicula> peliculas;
 
