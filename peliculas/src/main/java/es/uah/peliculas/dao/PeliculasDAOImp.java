@@ -49,7 +49,19 @@ public class PeliculasDAOImp implements IPeliculasDAO{
 
     @Override
     public void eliminarPelicula(Integer idPelicula) {
-        peliculasJPA.deleteById(idPelicula);
+
+        Optional<Pelicula> optional = peliculasJPA.findById(idPelicula);
+        if(optional.isPresent()){
+            Pelicula pelicula = optional.get();
+            List<Actor> actores = pelicula.getActores();
+            for(Actor actor: actores){
+                actores.remove(pelicula);
+            }
+
+            peliculasJPA.deleteById(idPelicula);
+        }
+
+
     }
 
     @Override

@@ -52,6 +52,7 @@ public class ActorDAOImp implements IActoresDAO{
             for (Pelicula pelicula: peliculas){
                 peliculas.remove(actor);
             }
+            actoresJPA.deleteById(actor.getId());
         }
     }
     @Override
