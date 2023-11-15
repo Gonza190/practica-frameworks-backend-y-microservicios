@@ -11,23 +11,13 @@ import org.springframework.ui.Model;
 public class HomeController {
 
     @GetMapping(value = {"", "/", "/home"})
-    public String home(Model model) {
+    public String home() {
         return "home";
     }
 
-    @GetMapping("/pelicula/alta")
-    public String altaPelicula(Model model){
-        model.addAttribute("titulo", "Nueva película");
-        Pelicula pelicula = new Pelicula();
-        model.addAttribute("pelicula", pelicula);
-        return "peliculas/formPelicula";
+    @GetMapping("/busqueda")
+    public String listadoBusqueda(){
+        return "views/listado";
     }
 
-    @GetMapping("/actor/alta")
-    public String altaActor(Model model){
-        model.addAttribute("nombre", "Nuevo actor");
-        Actor actor = new Actor();
-        model.addAttribute("actor", actor);
-        return "peliculas/formActor";
-    }
 }
