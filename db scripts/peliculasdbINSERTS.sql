@@ -52,6 +52,8 @@ insert into peliculasactores values
 (7,1),
 (7,8);
 
+update pelicula set portada= load_file('d:\\portadas\\la_la_land-262021831-large.jpg') where id=7;
+select * from pelicula
 
 #Consulta para ver los actores y peliculas que hay relacionados
 #select titulo, nombre, pelicula_id, actor_id from peliculasactores join actor on actor.id=actor_id join pelicula on pelicula.id = pelicula_id

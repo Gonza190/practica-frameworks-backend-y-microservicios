@@ -9,10 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PeliculasServiceImpl implements IPeliculasService{
@@ -48,6 +45,10 @@ public class PeliculasServiceImpl implements IPeliculasService{
     public Pelicula buscarPeliculaPorId(Integer id) {
 
         Pelicula pelicula = template.getForObject(URL_BASE + "/" +id, Pelicula.class);
+        //System.out.println(pelicula.getPortada());
+        //String decoded = new String(Base64.getDecoder().decode(pelicula.getPortada()));
+        //System.out.println("-----------------------");
+        //System.out.println(decoded);
         return pelicula;
     }
 

@@ -36,7 +36,7 @@
                     <td th:text="${pelicula.getDireccion()}"></td>
                     <td th:text="${pelicula.getGenero()}"></td>
                     <td th:text="${pelicula.getSinopsis()}" class="th-lg"></td>
-                    <td th:text="${pelicula.getPortada()}"></td>
+                    <td> <img src="/images/american_psycho-503776720-large.jpg" style="max-height: 150px"></td>
                     <td>
                         <a th:href="@{/ccursos/editar/{id}  (id=${pelicula.getId()})  }" th:text="'editar'" class="btn btn-success btn-sm" role="button" title="Editar la película."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                         <a th:href="@{/ccursos/borrar/{id}  (id=${pelicula.getId()})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar la película."><i class="fas fa-trash" aria-hidden="true"></i></a>
@@ -52,6 +52,16 @@
     </div>
     <hr>
     <a class="btn btn-primary" role="button" th:href="@{http://localhost:9000}">Ir a Inicio</a>
+
+    <div th:each="pelicula : ${peliculas}">
+        <div class="card" style="width: 18rem">
+            <img src="/images/american_psycho-503776720-large.jpg" class="card-img-top">
+            <div class="card-body">
+                <p class="card-text text-center" th:text="*{pelicula.getTitulo()}"></p>
+            </div>
+        </div>
+
+    </div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

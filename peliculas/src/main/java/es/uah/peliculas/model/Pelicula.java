@@ -33,6 +33,7 @@ public class Pelicula {
     @Basic
     @Column(name = "sinopsis")
     private String sinopsis;
+    @Lob
     @Basic
     @Column(name = "portada")
     private String portada;
