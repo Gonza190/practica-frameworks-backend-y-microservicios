@@ -32,6 +32,11 @@ public class PeliculasController {
         return peliculasService.buscarPeliculasPorGenero(genero);
     }
 
+    @GetMapping("/peliculas/actor/{actor}")
+    public List<Pelicula> buscarPeliculasPorActor(@PathVariable("actor") String actor){
+        return peliculasService.buscarPeliculasPorActor(actor);
+    }
+
     @PostMapping("/peliculas")
     public void guardarPelicula(@RequestBody Pelicula pelicula){
         peliculasService.guardarPelicula(pelicula);

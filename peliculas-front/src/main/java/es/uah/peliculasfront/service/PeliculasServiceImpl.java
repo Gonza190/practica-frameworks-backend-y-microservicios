@@ -98,7 +98,24 @@ public class PeliculasServiceImpl implements IPeliculasService{
 
     @Override
     public Page<Pelicula> buscarPeliculasPorActor(String actor, Pageable pageable) {
-        return buscarTodas(pageable);
+        Pelicula[] peliculas = template.getForObject(URL_BASE + "/actor/" + actor, Pelicula[].class);
+        List<Pelicula> peliculasList = Arrays.asList(peliculas);
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+
+        List<Pelicula> list;
+
+        if(peliculasList.size()<startItem){
+            list = Collections.emptyList();
+        }else{
+            int toIndex = Math.min(startItem+pageSize, peliculasList.size());
+            list = peliculasList.subList(startItem, toIndex);
+        }
+
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize), peliculasList.size());
+        return page;
     }
 
     @Override

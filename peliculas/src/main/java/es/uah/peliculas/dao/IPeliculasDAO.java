@@ -12,6 +12,7 @@ public interface IPeliculasDAO {
     List<Pelicula> buscarPeliculasPorTitulo(String titulo);
     List<Pelicula> buscarPeliculasPorGenero(String genero);
     List<Pelicula> buscarPeliculasPorActor(Actor actor);
+    List<Pelicula> buscarPeliculasPorActor(String actor);
     void guardarPelicula(Pelicula pelicula);
     void eliminarPelicula(Integer idPelicula);
     void actualizarPelicula(Pelicula pelicula);

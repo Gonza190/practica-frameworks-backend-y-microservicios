@@ -34,6 +34,11 @@ public class PeliculasServiceImp implements IPeliculasService{
     }
 
     @Override
+    public List<Pelicula> buscarPeliculasPorActor(String actor){
+        return peliculasDAO.buscarPeliculasPorActor(actor);
+    }
+
+    @Override
     public void guardarPelicula(Pelicula pelicula) {
         if(peliculasDAO.buscarPeliculaPorId(pelicula.getId()) == null){
             peliculasDAO.guardarPelicula(pelicula);

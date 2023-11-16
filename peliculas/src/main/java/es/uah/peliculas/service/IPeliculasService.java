@@ -10,6 +10,7 @@ public interface IPeliculasService {
     Pelicula buscarPeliculaPorId(Integer idPelicula);
     List<Pelicula> buscarPeliculasPorTitulo(String titulo);
     List<Pelicula> buscarPeliculasPorGenero(String genero);
+    List<Pelicula> buscarPeliculasPorActor(String actor);
     void guardarPelicula(Pelicula pelicula);
     void actualizarPelicula(Pelicula pelicula);
     void eliminarPelicula(Integer idPelicula);
