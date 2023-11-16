@@ -68,6 +68,25 @@ public class PeliculasServiceImpl implements IPeliculasService{
     }
 
     @Override
+    public List<Pelicula> buscarPeliculasPorTitulo(String titulo) {
+        Pelicula[] peliculas = template.getForObject(URL_BASE + "/titulo/" + titulo, Pelicula[].class);
+        return Arrays.asList(peliculas);
+
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculasPorGenero(String genero) {
+        Pelicula[] peliculas = template.getForObject(URL_BASE + "/genero/" + genero, Pelicula[].class);
+        return Arrays.asList(peliculas);
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculasPorActor(String actor) {
+        Pelicula[] peliculas = template.getForObject(URL_BASE, Pelicula[].class);
+        return Arrays.asList(peliculas);
+    }
+
+    @Override
     public void guardarPelicula(Pelicula pelicula) {
 
     }

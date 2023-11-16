@@ -53,15 +53,6 @@
     <hr>
     <a class="btn btn-primary" role="button" th:href="@{http://localhost:9000}">Ir a Inicio</a>
 
-    <div th:each="pelicula : ${peliculas}">
-        <div class="card" style="width: 18rem">
-            <img src="/images/american_psycho-503776720-large.jpg" class="card-img-top">
-            <div class="card-body">
-                <p class="card-text text-center" th:text="*{pelicula.getTitulo()}"></p>
-            </div>
-        </div>
-
-    </div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
