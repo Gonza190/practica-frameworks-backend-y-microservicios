@@ -23,8 +23,13 @@ public class PeliculasController {
     @Autowired
     IPeliculasService peliculasService;
 
-    @GetMapping("/")
-    public String listadoPeliculas(Model model) {
+    @GetMapping("")
+    public String listadoPeliculas(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
+        Pageable pageable = PageRequest.of(page, 8);
+        Page<Pelicula> peliculas = peliculasService.buscarTodas(pageable);
+        PageRender<Pelicula> pageRender = new PageRender<Pelicula>("/peliculas", peliculas);
+        model.addAttribute("peliculas", peliculas);
+        model.addAttribute("page", pageRender);
         return "views/listadoPeliculas";
     }
 
@@ -77,27 +82,31 @@ public class PeliculasController {
     @GetMapping("/buscar")
     public String buscarPelicula(Model model,
                                  @RequestParam(name = "buscarPor") String buscarPor,
-                                 @RequestParam(name = "tipo") int tipo) {
+                                 @RequestParam(name = "tipo") int tipo,
+                                 @RequestParam(name = "page", defaultValue = "0") int page) {
 
-        List<Pelicula> peliculas;
+        Pageable pageable = PageRequest.of(page, 8);
+        Page<Pelicula> peliculas;
         switch (tipo) {
             case 0: //búsqueda por título
-                peliculas=peliculasService.buscarPeliculasPorTitulo(buscarPor);
-                model.addAttribute("tipo","título");
+                peliculas = peliculasService.buscarPeliculasPorTitulo(buscarPor,pageable);
+                model.addAttribute("tipo", "título");
                 break;
             case 1: //búsqueda por género
-                peliculas=peliculasService.buscarPeliculasPorGenero(buscarPor);
-                model.addAttribute("tipo","género");
+                peliculas = peliculasService.buscarPeliculasPorGenero(buscarPor, pageable);
+                model.addAttribute("tipo", "género");
                 break;
             case 2: //búsqueda por actor
-                peliculas=peliculasService.buscarPeliculasPorActor(buscarPor);
-                model.addAttribute("tipo","actor");
+                peliculas = peliculasService.buscarPeliculasPorActor(buscarPor, pageable);
+                model.addAttribute("tipo", "actor");
                 break;
             default:
                 peliculas = null;
         }
+        PageRender<Pelicula> pageRender = new PageRender<Pelicula>("/peliculas/buscar", peliculas);
         model.addAttribute("peliculas", peliculas);
         model.addAttribute("busqueda", buscarPor);
+        model.addAttribute("page", pageRender);
         return "views/busquedaPeliculas";
     }
 

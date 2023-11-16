@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,29 +8,32 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-
-<div class="container" style="padding-left: 10px">
-    <h1 th:text="*{actor.getNombre()}"></h1>
-    <div style="display: flex">
-        <div class="valores" style="flex: 1">
-            <p class="fw-bold">Nombre: <span class="fw-normal" th:text="*{actor.getNombre()}"></span></p>
-            <p class="fw-bold">Fecha de nacimiento: <span class="fw-normal"
-                                                          th:text="*{actor.getFechaNacimiento()}"></span>
-            </p>
-            <p class="fw-bold">País: <span class="fw-normal" th:text="*{actor.getPais()}"></span></p>
-            <p class="fw-bold">Aparece en: <span class="fw-normal" th:text="*{peliculas}"></span></p>
-        </div>
-        <div style="flex: 1;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor"
-                 class="bi bi-person-square"
-                 viewBox="0 0 16 16">
+<h2 class="text-center">Listado de actores</h2>
+<div class="container">
+    <div class="row">
+        <div class="card" style="width: 200px; padding-left: 0px;padding-right: 0px; margin: 5px"
+             th:each="actor : ${actores}">
+            <a th:href="@{'/actores/' + ${actor.getId()}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor"
+                                                                     class="bi bi-person-square"
+                                                                     viewBox="0 0 16 16"
+                style="display: block;margin:auto">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-            </svg>
+            </svg></a>
+            <div class="card-body">
+                <p class="card-text text-center" th:text="*{actor.getNombre()}"></p>
+            </div>
         </div>
+
     </div>
+</div>
 
-
+<div style="padding-left:40%">
+    <nav th:replace="paginator-nav :: paginator"></nav>
+</div>
+<div style="padding-left: 45%">
+    <a class="btn btn-primary" role="button" th:href="@{/}">Ir a Inicio</a>
 </div>
 
 <!-- Bootstrap core JavaScript

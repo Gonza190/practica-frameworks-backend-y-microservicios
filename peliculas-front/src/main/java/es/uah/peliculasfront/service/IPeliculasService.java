@@ -11,9 +11,9 @@ public interface IPeliculasService {
     Page<Pelicula> buscarTodas(Pageable pageable);
     Pelicula buscarPeliculaPorId(Integer id);
     //busqueda con paginacion
-    Page<Pelicula> buscarPeliculasPorTitulo(Pageable pageable);
-    Page<Pelicula> buscarPeliculasPorGenero(Pageable pageable);
-    Page<Pelicula> buscarPeliculasPorActor(Pageable pageable);
+    Page<Pelicula> buscarPeliculasPorTitulo(String titulo,Pageable pageable);
+    Page<Pelicula> buscarPeliculasPorGenero(String genero, Pageable pageable);
+    Page<Pelicula> buscarPeliculasPorActor(String actor, Pageable pageable);
     //busqueda sin paginacion
     List<Pelicula> buscarPeliculasPorTitulo(String titulo);
     List<Pelicula> buscarPeliculasPorGenero(String genero);

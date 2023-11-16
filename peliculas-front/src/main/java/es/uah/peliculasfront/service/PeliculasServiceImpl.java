@@ -53,18 +53,52 @@ public class PeliculasServiceImpl implements IPeliculasService{
     }
 
     @Override
-    public Page<Pelicula> buscarPeliculasPorTitulo(Pageable pageable) {
-        return null;
+    public Page<Pelicula> buscarPeliculasPorTitulo(String titulo, Pageable pageable) {
+        Pelicula[] peliculas = template.getForObject(URL_BASE + "/titulo/" + titulo, Pelicula[].class);
+        List<Pelicula> peliculasList = Arrays.asList(peliculas);
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+
+        List<Pelicula> list;
+
+        if(peliculasList.size()<startItem){
+            list = Collections.emptyList();
+        }else{
+            int toIndex = Math.min(startItem+pageSize, peliculasList.size());
+            list = peliculasList.subList(startItem, toIndex);
+        }
+
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize), peliculasList.size());
+        return page;
     }
 
     @Override
-    public Page<Pelicula> buscarPeliculasPorGenero(Pageable pageable) {
-        return null;
+    public Page<Pelicula> buscarPeliculasPorGenero(String genero, Pageable pageable) {
+        Pelicula[] peliculas = template.getForObject(URL_BASE + "/genero/" + genero, Pelicula[].class);
+        List<Pelicula> peliculasList = Arrays.asList(peliculas);
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+
+        List<Pelicula> list;
+
+        if(peliculasList.size()<startItem){
+            list = Collections.emptyList();
+        }else{
+            int toIndex = Math.min(startItem+pageSize, peliculasList.size());
+            list = peliculasList.subList(startItem, toIndex);
+        }
+
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize), peliculasList.size());
+        return page;
     }
 
     @Override
-    public Page<Pelicula> buscarPeliculasPorActor(Pageable pageable) {
-        return null;
+    public Page<Pelicula> buscarPeliculasPorActor(String actor, Pageable pageable) {
+        return buscarTodas(pageable);
     }
 
     @Override

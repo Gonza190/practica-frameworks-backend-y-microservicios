@@ -22,8 +22,13 @@ public class ActoresController {
     @Autowired
     IActoresService actoresService;
 
-    @GetMapping("/")
-    public String listadoActores(){
+    @GetMapping("")
+    public String listadoActores(Model model, @RequestParam(name = "page", defaultValue = "0") int page){
+        Pageable pageable = PageRequest.of(page, 12);
+        Page<Actor> actores = actoresService.buscarTodos(pageable);
+        PageRender<Actor> pageRender = new PageRender<Actor>("/actores", actores);
+        model.addAttribute("actores", actores);
+        model.addAttribute("page", pageRender);
         return "views/listadoActores";
     }
 
