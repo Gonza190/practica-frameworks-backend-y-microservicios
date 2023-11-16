@@ -26,11 +26,11 @@
             <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
             <label class="btn btn-outline-primary" for="btnradio3">Actor</label>
         </div>
-        <div class="input-group my-3">
+        <form class="input-group my-3"> <!--th:action="@{peliculas/buscar/(buscarPor=,tipo=)}" method="get"--->
             <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
                    aria-describedby="basic-addon1">
             <button type="button" class="btn btn-primary">Buscar</button>
-        </div>
+        </form>
     </div>
     <hr>
     <div class="peliculas-section">
