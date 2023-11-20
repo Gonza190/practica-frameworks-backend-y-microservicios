@@ -29,7 +29,8 @@
                     <td th:text="${actor.getPais()}"></td>
 
                     <td>
-                        <a th:href="@{/ccursos/editar/{id}  (id=${actor.getId()})  }" th:text="'Editar'" class="btn btn-success btn-sm" role="button" title="Editar el actor."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                        <a th:href="@{'/actores/' + ${actor.getId()}}" th:text="'Ver'" class="btn btn-primary btn-sm" role="button" title="Ver la información de la película."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                        <a th:href="@{'/actores/modificar/' + ${actor.getId()}}" th:text="'Editar'" class="btn btn-success btn-sm" role="button" title="Editar el actor."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                         <a th:href="@{/ccursos/borrar/{id}  (id=${actor.getId()})   }" th:text="'Borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar el actor."><i class="fas fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>

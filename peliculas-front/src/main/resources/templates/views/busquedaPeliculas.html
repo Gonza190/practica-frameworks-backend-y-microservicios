@@ -13,7 +13,7 @@
     <div class="row">
         <div class="card" style="width: 18rem; padding-left: 0px;padding-right: 0px; margin: 5px"
              th:each="pelicula : ${peliculas}">
-            <a th:href="@{'/peliculas/' + ${pelicula.getId()}}"><img src="/images/american_psycho-503776720-large.jpg" class="card-img-top"></a>
+            <a th:href="@{'/peliculas/' + ${pelicula.getId()}}"><img th:src="@{'/peliculas/uploads/' + ${pelicula.getPortada()}}"  class="card-img-top"></a>
             <div class="card-body">
                 <p class="card-text text-center" th:text="*{pelicula.getTitulo()}"></p>
             </div>

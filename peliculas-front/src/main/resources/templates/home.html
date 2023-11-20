@@ -15,21 +15,25 @@
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg></h2>
         <p>Buscar por:</p>
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <form class="input-group my-3" th:action="@{peliculas/buscar}" method="get">
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo" id="inlineRadio1" value="0" th:required="required">
+                    <label class="form-check-label" for="inlineRadio1">Título</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo" id="inlineRadio2" value="1">
+                    <label class="form-check-label" for="inlineRadio2">Género</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo" id="inlineRadio3" value="2">
+                    <label class="form-check-label" for="inlineRadio3">Actor</label>
+                </div>
+            </div>
 
-            <input type="radio" class="btn-check ms-3" name="btnradio" id="btnradio1" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btnradio1">Título</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio2">Género</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio3">Actor</label>
-        </div>
-        <form class="input-group my-3"> <!--th:action="@{peliculas/buscar/(buscarPor=,tipo=)}" method="get"--->
-            <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
-                   aria-describedby="basic-addon1">
-            <button type="button" class="btn btn-primary">Buscar</button>
+            <input type="text" class="form-control" id="buscarPor" name="buscarPor" placeholder="Buscar" aria-label="Buscar"
+                   aria-describedby="basic-addon1" th:required="required">
+            <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
     </div>
     <hr>

@@ -36,10 +36,10 @@
                     <td th:text="${pelicula.getDireccion()}"></td>
                     <td th:text="${pelicula.getGenero()}"></td>
                     <td th:text="${pelicula.getSinopsis()}" class="th-lg"></td>
-                    <td> <img src="/images/american_psycho-503776720-large.jpg" style="max-height: 150px"></td>
+                    <td> <img th:src="@{'/peliculas/uploads/' + ${pelicula.getPortada()}}"  style="max-height: 150px"></td>
                     <td>
                         <a th:href="@{'/peliculas/' + ${pelicula.getId()}}" th:text="'Ver'" class="btn btn-primary btn-sm" role="button" title="Ver la información de la película."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                        <a th:href="@{/ccursos/editar/{id}  (id=${pelicula.getId()})  }" th:text="'Editar'" class="btn btn-success btn-sm" role="button" title="Editar la película."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                        <a th:href="@{'/peliculas/modificar/' + ${pelicula.getId()}}" th:text="'Editar'" class="btn btn-success btn-sm" role="button" title="Editar la película."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                         <a th:href="@{/ccursos/borrar/{id}  (id=${pelicula.getId()})   }" th:text="'Borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar la película."><i class="fas fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>

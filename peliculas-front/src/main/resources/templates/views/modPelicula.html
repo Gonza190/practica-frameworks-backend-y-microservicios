@@ -42,7 +42,7 @@
     </div>
     <div class="mb-3">
         <label for="sinopsis" class="form-label">Sinopsis</label>
-        <textarea type="text" class="form-control" rows="5" th:value="*{pelicula.getSinopsis()}" id="sinopsis" name="sinopsis"
+        <textarea type="text" class="form-control" rows="5" th:text="*{pelicula.getSinopsis()}" id="sinopsis" name="sinopsis"
                   placeholder="Escriba una sinopsis para la película (máximo 500 caracteres)" required="required"></textarea>
     </div>
     <div class="mb-3">
@@ -51,7 +51,7 @@
     </div>
     <div class="my-3">
         <button type="button" class="btn btn-primary m-lg-0-3">Modificar</button>
-        <button type="button" class="btn btn-secondary">Volver</button>
+        <a type="button" class="btn btn-secondary" th:href="@{'/peliculas/gestion'}">Volver</a>
     </div>
 </form>
 

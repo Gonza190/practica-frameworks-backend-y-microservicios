@@ -3,17 +3,22 @@ package es.uah.peliculasfront.controller;
 import es.uah.peliculasfront.model.Pelicula;
 import es.uah.peliculasfront.paginator.PageRender;
 import es.uah.peliculasfront.service.IPeliculasService;
+import es.uah.peliculasfront.service.IUploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.core.io.Resource;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 @Controller
@@ -23,6 +28,8 @@ public class PeliculasController {
     @Autowired
     IPeliculasService peliculasService;
 
+    @Autowired
+    private IUploadFileService uploadFileService;
     @GetMapping("")
     public String listadoPeliculas(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 8);
@@ -81,9 +88,10 @@ public class PeliculasController {
      */
     @GetMapping("/buscar")
     public String buscarPelicula(Model model,
-                                 @RequestParam(name = "buscarPor") String buscarPor,
                                  @RequestParam(name = "tipo") int tipo,
+                                 @RequestParam(name = "buscarPor") String buscarPor,
                                  @RequestParam(name = "page", defaultValue = "0") int page) {
+
 
         Pageable pageable = PageRequest.of(page, 8);
         Page<Pelicula> peliculas;
@@ -108,6 +116,23 @@ public class PeliculasController {
         model.addAttribute("busqueda", buscarPor);
         model.addAttribute("page", pageRender);
         return "views/busquedaPeliculas";
+    }
+
+
+    @GetMapping("/uploads/{filename:.+}")
+    public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
+
+        Resource recurso = null;
+
+        try {
+            recurso = uploadFileService.load(filename);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
+                .body(recurso);
     }
 
 

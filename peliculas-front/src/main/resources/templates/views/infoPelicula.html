@@ -26,9 +26,11 @@
             <p class="fw-bold">Actores: <span class="fw-normal" th:text="*{actores}"></span></p>
         </div>
         <div style="flex: 1; padding-left: 100px">
-            <img src="/images/american_psycho-503776720-large.jpg" style="max-height: 450px"/>
+            <img th:src="@{'/peliculas/uploads/' + ${pelicula.getPortada()}}"  style="max-height: 450px"/>
         </div>
     </div>
+    <a class="btn btn-primary" role="button" th:href="@{/}">Ir a Inicio</a>
+
 </div>
 
 <!-- Bootstrap core JavaScript
