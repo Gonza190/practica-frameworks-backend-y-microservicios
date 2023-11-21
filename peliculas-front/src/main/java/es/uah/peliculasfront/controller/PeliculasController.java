@@ -165,6 +165,24 @@ public class PeliculasController {
 
     }
 
+    @GetMapping("/borrar/{id}")
+    public String eliminarPelicula(Model model,
+                                   @PathVariable("id") Integer id,
+                                   RedirectAttributes atributos){
+
+        //Para borrar la portada de la aplicación
+        Pelicula pelicula = peliculasService.buscarPeliculaPorId(id);
+        if (uploadFileService.delete(pelicula.getPortada())) {
+            atributos.addFlashAttribute("msg", "Imagen " + pelicula.getPortada() + " eliminada con exito!");
+        }
+
+        //Para borrar la pelicula de la BBDD
+        peliculasService.eliminarPelicula(id);
+        atributos.addFlashAttribute("msg", "Los datos de la película fueron borrados");
+
+        return "redirect:/peliculas";
+    }
+
     private String formatearActores(Pelicula pelicula) {
         String formateado = "";
         if(pelicula.getActores().size()>0){

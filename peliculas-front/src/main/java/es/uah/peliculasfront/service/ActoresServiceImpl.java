@@ -63,12 +63,19 @@ public class ActoresServiceImpl implements IActoresService {
     }
 
     @Override
-    public void guardarActor(Actor Actor) {
+    public void guardarActor(Actor actor) {
 
+            if(actor.getId() != null && actor.getId()>0){
+                template.put(URL_BASE, actor);
+            }else{
+                actor.setId(0);
+                template.postForObject(URL_BASE, actor, String.class);
+            }
     }
 
     @Override
     public void eliminarActor(Integer id) {
 
+        template.delete(URL_BASE + "/" + id);
     }
 }

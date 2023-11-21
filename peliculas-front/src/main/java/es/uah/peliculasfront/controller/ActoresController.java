@@ -10,10 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/actores")
@@ -23,7 +22,7 @@ public class ActoresController {
     IActoresService actoresService;
 
     @GetMapping("")
-    public String listadoActores(Model model, @RequestParam(name = "page", defaultValue = "0") int page){
+    public String listadoActores(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 12);
         Page<Actor> actores = actoresService.buscarTodos(pageable);
         PageRender<Actor> pageRender = new PageRender<Actor>("/actores", actores);
@@ -33,7 +32,7 @@ public class ActoresController {
     }
 
     @GetMapping("/alta")
-    public String altaActor(Model model){
+    public String altaActor(Model model) {
         model.addAttribute("nombre", "Nuevo actor");
         Actor actor = new Actor();
         model.addAttribute("actor", actor);
@@ -41,12 +40,12 @@ public class ActoresController {
     }
 
     @GetMapping("/gestion")
-    public String gestionActores(Model model, @RequestParam(name = "page", defaultValue = "0") int page){
+    public String gestionActores(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
 
-        Pageable pageable = PageRequest.of(page,10);
+        Pageable pageable = PageRequest.of(page, 10);
         Page<Actor> actores = actoresService.buscarTodos(pageable);
-        PageRender<Actor> pageRender = new PageRender<Actor>("/actores/gestion",actores);
-        model.addAttribute("actores",actores);
+        PageRender<Actor> pageRender = new PageRender<Actor>("/actores/gestion", actores);
+        model.addAttribute("actores", actores);
         model.addAttribute("page", pageRender);
 
         return "views/gestionActores";
@@ -54,7 +53,7 @@ public class ActoresController {
 
 
     @GetMapping("/{id}")
-    public String infoActor(Model model, @PathVariable(name = "id") int id){
+    public String infoActor(Model model, @PathVariable(name = "id") int id) {
 
         Actor actor = actoresService.buscarActorPorId(id);
         model.addAttribute("actor", actor);
@@ -65,7 +64,7 @@ public class ActoresController {
     }
 
     @GetMapping("/modificar/{id}")
-    public String modificarActor(Model model, @PathVariable(name = "id") int id){
+    public String modificarActor(Model model, @PathVariable(name = "id") int id) {
 
         Actor actor = actoresService.buscarActorPorId(id);
         model.addAttribute("actor", actor);
@@ -73,15 +72,37 @@ public class ActoresController {
 
     }
 
-    private String formatearPeliculas(Actor actor){
-        String formateado = "";
-        for (int i=0;i<actor.getPeliculas().size()-1;i++){
-            formateado+=actor.getPeliculas().get(i).getTitulo() + ", ";
-        }
-        formateado+=actor.getPeliculas().get(actor.getPeliculas().size()-1).getTitulo();
-        return formateado;
+    @PostMapping("/guardar/")
+    public String guardarActor(Model model,
+                               Actor actor,
+                               RedirectAttributes atributos) {
+
+        actoresService.guardarActor(actor);
+        atributos.addFlashAttribute("msg", "Los datos del actor han sido guardados");
+        return "redirect:/actores";
     }
 
+    @GetMapping("/borrar/{id}")
+    public String eliminarActor(Model model,
+                                @PathVariable("id") Integer id,
+                                RedirectAttributes atributos) {
+
+        actoresService.eliminarActor(id);
+        atributos.addFlashAttribute("msg", "Los datos del actor fueron borrados");
+
+        return "redirect:/actores";
+    }
+
+    private String formatearPeliculas(Actor actor) {
+        String formateado = "";
+        if (actor.getPeliculas().size() > 0) {
+            for (int i = 0; i < actor.getPeliculas().size() - 1; i++) {
+                formateado += actor.getPeliculas().get(i).getTitulo() + ", ";
+            }
+            formateado += actor.getPeliculas().get(actor.getPeliculas().size() - 1).getTitulo();
+        }
+        return formateado;
+    }
 
 
 }

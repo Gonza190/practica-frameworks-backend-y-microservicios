@@ -151,6 +151,6 @@ public class PeliculasServiceImpl implements IPeliculasService{
 
     @Override
     public void eliminarPelicula(Integer id) {
-
+        template.delete(URL_BASE + "/" + id);
     }
 }

@@ -7,7 +7,7 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
 <body>
 
-<form class="container">
+<form class="container"  th:action="@{/peliculas/guardar/}" method="post" enctype="multipart/form-data">
     <h1>Modificación de película</h1>
     <hr>
     <div class="mb-3">
@@ -50,7 +50,7 @@
         <input type="file" class="form-control" id="portada" name="portada" required="required">
     </div>
     <div class="my-3">
-        <button type="button" class="btn btn-primary m-lg-0-3">Modificar</button>
+        <button type="submit" class="btn btn-primary m-lg-0-3">Modificar</button>
         <a type="button" class="btn btn-secondary" th:href="@{'/peliculas/gestion'}">Volver</a>
     </div>
 </form>

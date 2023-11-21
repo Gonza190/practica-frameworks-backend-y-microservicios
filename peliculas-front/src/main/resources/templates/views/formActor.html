@@ -7,27 +7,27 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
 <body>
 
-<form class="container">
+<form class="container" th:action="@{/actores/guardar/}" method="post" th:object="${actor}" enctype="multipart/form-data">
     <h1>Alta de actor</h1>
     <hr>
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre"
+        <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}"
                placeholder="Escriba el nombre del actor" required="required">
     </div>
     <div class="mb-3">
         <label for="fecha" class="form-label">Año</label>
-        <input type="date" class="form-control"  id="fecha" name="fecha"
+        <input type="date" class="form-control"  id="fecha" name="fecha" th:field="*{fechaNacimiento}"
                placeholder="Escriba la fecha de nacimiento del actor" required="required">
     </div>
 
     <div class="mb-3">
         <label for="pais" class="form-label">País</label>
-        <input type="text" class="form-control" id="pais" name="pais"
+        <input type="text" class="form-control" id="pais" name="pais" th:field="*{pais}"
                placeholder="Escriba el país de origen del actor" required="required">
     </div>
     <div class="my-3">
-        <button type="button" class="btn btn-primary m-lg-0-3">Dar de alta</button>
+        <button type="submit" class="btn btn-primary m-lg-0-3">Dar de alta</button>
         <a type="button" class="btn btn-secondary" th:href="@{/}">Volver</a>
     </div>
 </form>
