@@ -54,7 +54,7 @@ insert into peliculasactores values
 
 
 
-select * from peliculasactores
+select * from pelicula;
 #Consulta para ver los actores y peliculas que hay relacionados
 #select titulo, nombre, pelicula_id, actor_id from peliculasactores join actor on actor.id=actor_id join pelicula on pelicula.id = pelicula_id
 #select * from peliculasactores

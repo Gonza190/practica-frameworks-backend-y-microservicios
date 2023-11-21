@@ -1,3 +1,4 @@
+//Interfaz y clase obtenidas de la sesión 6 del laboratorio de la asignatura
 package es.uah.peliculasfront.service;
 
 import org.springframework.core.io.Resource;

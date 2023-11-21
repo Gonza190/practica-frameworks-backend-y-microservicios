@@ -1,3 +1,4 @@
+//Clase obtenida de la sesión 3 del laboratorio de la asignatura
 package es.uah.peliculasfront.paginator;
 
 import org.springframework.data.domain.Page;

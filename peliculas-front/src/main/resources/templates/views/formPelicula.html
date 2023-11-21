@@ -7,52 +7,54 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
 <body>
 
-<form class="container">
+<form class="container" th:action="@{/peliculas/guardar/}" method="post" th:object="${pelicula}" enctype="multipart/form-data">
     <h1>Alta de película</h1>
     <hr>
-    <div class="mb-3">
-        <label for="titulo" class="form-label">Título</label>
-        <input type="text" class="form-control"  id="titulo" name="titulo"
-               placeholder="Escriba el título de la película" required="required">
-    </div>
-    <div class="mb-3">
-        <label for="anno" class="form-label">Año</label>
-        <input type="number" class="form-control"  id="anno" name="anno"
-               placeholder="Escriba el año de estreno de la película" required="required">
-    </div>
-    <div class="mb-3">
-        <label for="duracion" class="form-label">Duración</label>
-        <input type="number" class="form-control"  id="duracion" name="duracion"
-               placeholder="Escriba la duración de la película en minutos" required="required">
-    </div>
-    <div class="mb-3">
-        <label for="pais" class="form-label">País</label>
-        <input type="text" class="form-control"  id="pais" name="pais"
-               placeholder="Escriba el país de origen de la película" required="required">
-    </div>
-    <div class="mb-3">
-        <label for="direccion" class="form-label">Dirección</label>
-        <input type="text" class="form-control"  id="direccion" name="direccion"
-               placeholder="Escriba el director de la película" required="required">
-    </div>
-    <div class="mb-3">
-        <label for="genero" class="form-label">Género</label>
-        <input type="text" class="form-control"  id="genero" name="genero"
-               placeholder="Escriba el/los género/s de la película" required="required">
-    </div>
-    <div class="mb-3">
-        <label for="sinopsis" class="form-label">Sinopsis</label>
-        <textarea type="text" class="form-control" rows="5" id="sinopsis" name="sinopsis"
-                  placeholder="Escriba una sinopsis para la película (máximo 500 caracteres)" required="required"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="portada" class="form-label">Portada</label>
-        <input type="file" class="form-control"  id="portada" name="portada" required="required">
-    </div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control"  id="titulo" name="titulo" th:field="*{titulo}"
+                   placeholder="Escriba el título de la película" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="anno" class="form-label">Año</label>
+            <input type="number" class="form-control"  id="anno" name="anno" th:field="*{anno}"
+                   placeholder="Escriba el año de estreno de la película" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="duracion" class="form-label">Duración</label>
+            <input type="number" class="form-control"  id="duracion" name="duracion" th:field="*{duracion}"
+                   placeholder="Escriba la duración de la película en minutos" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="pais" class="form-label">País</label>
+            <input type="text" class="form-control"  id="pais" name="pais" th:field="*{pais}"
+                   placeholder="Escriba el país de origen de la película" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control"  id="direccion" name="direccion" th:field="*{direccion}"
+                   placeholder="Escriba el director de la película" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="genero" class="form-label">Género</label>
+            <input type="text" class="form-control"  id="genero" name="genero" th:field="*{genero}"
+                   placeholder="Escriba el/los género/s de la película" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="sinopsis" class="form-label">Sinopsis</label>
+            <textarea type="text" class="form-control" rows="5" id="sinopsis" name="sinopsis" th:field="*{sinopsis}"
+                      placeholder="Escriba una sinopsis para la película (máximo 500 caracteres)" required="required"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">Portada</label>
+            <input type="file" class="form-control"  id="file" name="file">
+        </div>
+    <input type="hidden" th:field="*{portada}"/>
     <div class="my-3">
-        <button type="button" class="btn btn-primary m-lg-0-3">Dar de alta</button>
-        <a type="button" class="btn btn-secondary" th:href="@{/}">Volver</a>
-    </div>
+            <button type="submit" class="btn btn-primary m-lg-0-3">Guardar</button>
+            <a type="button" class="btn btn-secondary" th:href="@{/}">Volver</a>
+        </div>
+
 </form>
 
 <!-- Bootstrap core JavaScript

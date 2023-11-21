@@ -12,12 +12,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
@@ -30,6 +30,7 @@ public class PeliculasController {
 
     @Autowired
     private IUploadFileService uploadFileService;
+
     @GetMapping("")
     public String listadoPeliculas(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 8);
@@ -97,7 +98,7 @@ public class PeliculasController {
         Page<Pelicula> peliculas;
         switch (tipo) {
             case 0: //búsqueda por título
-                peliculas = peliculasService.buscarPeliculasPorTitulo(buscarPor,pageable);
+                peliculas = peliculasService.buscarPeliculasPorTitulo(buscarPor, pageable);
                 model.addAttribute("tipo", "título");
                 break;
             case 1: //búsqueda por género
@@ -136,12 +137,42 @@ public class PeliculasController {
     }
 
 
+    @PostMapping("/guardar/")
+    public String guardarPelicula(Model model,
+                                  Pelicula pelicula,
+                                  @RequestParam("file") MultipartFile portada,
+                                  RedirectAttributes atributos) {
+
+        if (!portada.isEmpty()) {
+            if (pelicula.getId() != null && pelicula.getId() > 0 && pelicula.getPortada() != null &&
+                    pelicula.getPortada().length() > 0) {
+                uploadFileService.delete(pelicula.getPortada());
+            }
+            String uniqueFilename = null;
+            try{
+                uniqueFilename = uploadFileService.copy(portada);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            atributos.addFlashAttribute("msg", "Se ha subido correctamente" + uniqueFilename);
+            pelicula.setPortada(uniqueFilename);
+        }
+
+        peliculasService.guardarPelicula(pelicula);
+        atributos.addFlashAttribute("msg","Los datos de la película fueron guardados");
+        return "redirect:/peliculas";
+
+    }
+
     private String formatearActores(Pelicula pelicula) {
         String formateado = "";
-        for (int i = 0; i < pelicula.getActores().size() - 1; i++) {
-            formateado += pelicula.getActores().get(i).getNombre() + ", ";
+        if(pelicula.getActores().size()>0){
+            for (int i = 0; i < pelicula.getActores().size() - 1; i++) {
+                formateado += pelicula.getActores().get(i).getNombre() + ", ";
+            }
+            formateado += pelicula.getActores().get(pelicula.getActores().size() - 1).getNombre();
         }
-        formateado += pelicula.getActores().get(pelicula.getActores().size() - 1).getNombre();
         return formateado;
     }
 

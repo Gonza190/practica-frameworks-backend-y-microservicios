@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URL;
 import java.util.*;
 
 @Service
@@ -140,6 +141,12 @@ public class PeliculasServiceImpl implements IPeliculasService{
     @Override
     public void guardarPelicula(Pelicula pelicula) {
 
+        if(pelicula.getId() != null && pelicula.getId()>0){
+            template.put(URL_BASE, pelicula);
+        }else {
+            pelicula.setId(0);
+            template.postForObject(URL_BASE, pelicula, String.class);
+        }
     }
 
     @Override
