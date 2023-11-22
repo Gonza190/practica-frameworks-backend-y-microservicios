@@ -7,7 +7,7 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<form class="container" th:action="@{/peliculas/asociar/}" method="get" th:object="${peliculasActores}" >
     <div class="titulo">
         <h1>Asociar películas y actores</h1>
         <h4>Seleccione una película y un actor que aparezca en ella. Pulse en el botón para asociarlos.</h4>
@@ -16,25 +16,25 @@
     <div class="dropdowns">
         <div class="dropdown-peliculas my-3">
             Película:
-            <select class="mx-2">
+            <select class="mx-2" th:field="*{idPelicula}">
                 <option th:each="pelicula : ${peliculas}" th:text="${pelicula.getTitulo()}" th:value="${pelicula.getId()}"></option>
             </select>
         </div>
 
         <div class="dropdown-actores my-3">
             Actor:
-            <select class="mx-2">
+            <select class="mx-2" th:field="*{idActor}">
                 <option th:each="actor : ${actores}" th:text="${actor.nombre}" th:value="${actor.getId()}"></option>
             </select>
         </div>
     </div>
 
     <div class="boton">
-        <a th:text="'Asociar'" onclick="return confirm('¿Quieres asociar la película y el actor seleccionados?')" class="btn btn-primary" role="button" title="Asociar la pelicula y el actor"><i class="fas fa-trash" aria-hidden="true"></i></a>
+        <button type="submit" th:text="'Asociar'" onclick="return confirm('¿Quieres asociar la película y el actor seleccionados?')" class="btn btn-primary" role="button" title="Asociar la pelicula y el actor"><i class="fas fa-trash" aria-hidden="true"></i></button>
         <a class="btn btn-secondary" role="button" th:href="@{/}">Volver</a>
     </div>
 
-</div>
+</form>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

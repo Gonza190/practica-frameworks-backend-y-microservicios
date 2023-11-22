@@ -1,6 +1,8 @@
 package es.uah.peliculasfront.controller;
 
+import es.uah.peliculasfront.model.Actor;
 import es.uah.peliculasfront.model.Pelicula;
+import es.uah.peliculasfront.model.PeliculasActores;
 import es.uah.peliculasfront.paginator.PageRender;
 import es.uah.peliculasfront.service.IPeliculasService;
 import es.uah.peliculasfront.service.IUploadFileService;
@@ -184,6 +186,17 @@ public class PeliculasController {
 
         return "redirect:/peliculas";
     }
+
+
+
+    @GetMapping("/asociar/")
+    public String asociarPeliculaActor(PeliculasActores peliculasActores) {
+
+        peliculasService.asociar(peliculasActores.getIdPelicula(), peliculasActores.getIdActor());
+        System.out.println(peliculasActores.getIdPelicula() + " " + peliculasActores.getIdActor());
+        return "redirect:/";
+    }
+
 
     private String formatearActores(Pelicula pelicula) {
         String formateado = "";

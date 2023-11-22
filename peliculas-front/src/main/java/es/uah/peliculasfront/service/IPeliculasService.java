@@ -22,5 +22,7 @@ public interface IPeliculasService {
     void guardarPelicula(Pelicula pelicula);
     void eliminarPelicula(Integer id);
 
+    void asociar(int idPelicula, int idActor);
+
 
 }

@@ -156,4 +156,9 @@ public class PeliculasServiceImpl implements IPeliculasService {
     public void eliminarPelicula(Integer id) {
         template.delete(URL_BASE + "/" + id);
     }
+
+    @Override
+    public void asociar(int idPelicula, int idActor){
+        template.getForObject("http://localhost:8001/actor/anadir/" + idActor + "/" + idPelicula, String.class);
+    }
 }
