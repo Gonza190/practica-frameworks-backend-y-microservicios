@@ -74,8 +74,10 @@ public class PeliculasController {
     @GetMapping("/modificar/{id}")
     public String modificarPelicula(Model model, @PathVariable(name = "id") int id) {
 
-        Pelicula pelicula = peliculasService.buscarPeliculaPorId(id);
-        model.addAttribute("pelicula", pelicula);
+        Pelicula peliculaGuardada = peliculasService.buscarPeliculaPorId(id);
+        Pelicula nuevaPelicula = peliculasService.buscarPeliculaPorId(id);
+        model.addAttribute("peliculaGuardada", peliculaGuardada);
+        model.addAttribute("nuevaPelicula", nuevaPelicula);
         return "views/modPelicula";
 
     }
@@ -139,14 +141,14 @@ public class PeliculasController {
 
     @PostMapping("/guardar/")
     public String guardarPelicula(Model model,
-                                  Pelicula pelicula,
+                                  Pelicula nuevaPelicula,
                                   @RequestParam("file") MultipartFile portada,
                                   RedirectAttributes atributos) {
 
         if (!portada.isEmpty()) {
-            if (pelicula.getId() != null && pelicula.getId() > 0 && pelicula.getPortada() != null &&
-                    pelicula.getPortada().length() > 0) {
-                uploadFileService.delete(pelicula.getPortada());
+            if (nuevaPelicula.getId() != null && nuevaPelicula.getId() > 0 && nuevaPelicula.getPortada() != null &&
+                    nuevaPelicula.getPortada().length() > 0) {
+                uploadFileService.delete(nuevaPelicula.getPortada());
             }
             String uniqueFilename = null;
             try{
@@ -156,10 +158,10 @@ public class PeliculasController {
             }
 
             atributos.addFlashAttribute("msg", "Se ha subido correctamente" + uniqueFilename);
-            pelicula.setPortada(uniqueFilename);
+            nuevaPelicula.setPortada(uniqueFilename);
         }
 
-        peliculasService.guardarPelicula(pelicula);
+        peliculasService.guardarPelicula(nuevaPelicula);
         atributos.addFlashAttribute("msg","Los datos de la película fueron guardados");
         return "redirect:/peliculas";
 

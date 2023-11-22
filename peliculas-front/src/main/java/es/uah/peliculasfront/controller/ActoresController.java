@@ -66,20 +66,22 @@ public class ActoresController {
     @GetMapping("/modificar/{id}")
     public String modificarActor(Model model, @PathVariable(name = "id") int id) {
 
-        Actor actor = actoresService.buscarActorPorId(id);
-        model.addAttribute("actor", actor);
+        Actor actorGuardado = actoresService.buscarActorPorId(id);
+        Actor nuevoActor = actoresService.buscarActorPorId(id);
+        model.addAttribute("actorGuardado", actorGuardado);
+        model.addAttribute("nuevoActor", nuevoActor);
         return "views/modActor";
 
     }
 
     @PostMapping("/guardar/")
     public String guardarActor(Model model,
-                               Actor actor,
+                               Actor nuevoActor,
                                RedirectAttributes atributos) {
 
-        actoresService.guardarActor(actor);
+        actoresService.guardarActor(nuevoActor);
         atributos.addFlashAttribute("msg", "Los datos del actor han sido guardados");
-        return "redirect:/actores";
+        return "redirect:/actores/gestion";
     }
 
     @GetMapping("/borrar/{id}")

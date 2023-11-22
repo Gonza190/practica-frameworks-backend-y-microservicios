@@ -7,28 +7,30 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
 <body>
 
-<form class="container">
+<form class="container" th:action="@{/actores/guardar/}" method="post" th:object="${nuevoActor}" enctype="multipart/form-data">
     <h1>Modificación de actor</h1>
     <hr>
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" th:value="*{actor.getNombre()}" id="nombre" name="nombre"
-               placeholder="Escriba el nombre del actor" required="required">
+        <input type="text" class="form-control" th:value="${actorGuardado.getNombre()}" id="nombre" name="nombre"
+                placeholder="Escriba el nombre del actor" required="required" th:field="*{nombre}">
     </div>
     <div class="mb-3">
         <label for="fecha" class="form-label">Año</label>
-        <input type="date" class="form-control" th:value="*{actor.getFechaNacimiento()}" id="fecha" name="fecha"
-               placeholder="Escriba la fecha de nacimiento del actor" required="required">
+        <input type="date" class="form-control" th:value="${actorGuardado.getFechaNacimiento()}" id="fecha" name="fecha"
+               placeholder="Escriba la fecha de nacimiento del actor" required="required" th:field="*{fechaNacimiento}">
     </div>
 
     <div class="mb-3">
         <label for="pais" class="form-label">País</label>
-        <input type="text" class="form-control" th:value="*{actor.getPais()}" id="pais" name="pais"
-               placeholder="Escriba el país de origen del actor" required="required">
+        <input type="text" class="form-control" th:value="${actorGuardado.getPais()}" id="pais" name="pais"
+               placeholder="Escriba el país de origen del actor" required="required" th:field="*{pais}">
     </div>
+
     <div class="my-3">
-        <button type="button" class="btn btn-primary m-lg-0-3">Actualizar</button>
+        <button type="submit" class="btn btn-primary m-lg-0-3">Actualizar</button>
         <a type="button" class="btn btn-secondary" th:href="@{'/actores/gestion'}">Volver</a>
+        <input type="hidden" th:field="*{id}"/>
     </div>
 </form>
 

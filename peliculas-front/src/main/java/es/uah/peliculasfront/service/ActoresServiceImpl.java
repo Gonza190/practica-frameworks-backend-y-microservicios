@@ -23,7 +23,7 @@ public class ActoresServiceImpl implements IActoresService {
 
 
     @Override
-    public List<Actor> buscarTodos(){
+    public List<Actor> buscarTodos() {
         Actor[] actores = template.getForObject(URL_BASE, Actor[].class);
         return Arrays.asList(actores);
     }
@@ -40,14 +40,14 @@ public class ActoresServiceImpl implements IActoresService {
 
         List<Actor> list;
 
-        if(actoresList.size()<startItem){
+        if (actoresList.size() < startItem) {
             list = Collections.emptyList();
-        }else{
-            int toIndex = Math.min(startItem+pageSize, actoresList.size());
+        } else {
+            int toIndex = Math.min(startItem + pageSize, actoresList.size());
             list = actoresList.subList(startItem, toIndex);
         }
 
-        Page<Actor> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize),actoresList.size());
+        Page<Actor> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), actoresList.size());
         return page;
 
     }
@@ -70,13 +70,12 @@ public class ActoresServiceImpl implements IActoresService {
 
     @Override
     public void guardarActor(Actor actor) {
-
-            if(actor.getId() != null && actor.getId()>0){
-                template.put(URL_BASE, actor);
-            }else{
-                actor.setId(0);
-                template.postForObject(URL_BASE, actor, String.class);
-            }
+        if (actor.getId() != null && actor.getId() > 0) {
+            template.put(URL_BASE, actor);
+        } else {
+            actor.setId(0);
+            template.postForObject(URL_BASE, actor, String.class);
+        }
     }
 
     @Override

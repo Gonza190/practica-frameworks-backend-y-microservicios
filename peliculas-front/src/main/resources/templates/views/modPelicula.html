@@ -7,51 +7,59 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
 <body>
 
-<form class="container"  th:action="@{/peliculas/guardar/}" method="post" enctype="multipart/form-data">
+<form class="container"  th:action="@{/peliculas/guardar/}" method="post"  th:object="${nuevaPelicula}" enctype="multipart/form-data">
     <h1>Modificación de película</h1>
     <hr>
     <div class="mb-3">
         <label for="titulo" class="form-label">Título</label>
-        <input type="text" class="form-control" th:value="*{pelicula.getTitulo()}" id="titulo" name="titulo"
-               placeholder="Escriba el título de la película" required="required">
+        <input type="text" class="form-control" th:value="${peliculaGuardada.getTitulo()}" id="titulo" name="titulo"
+               placeholder="Escriba el título de la película" required="required" th:field="*{titulo}">
     </div>
     <div class="mb-3">
         <label for="anno" class="form-label">Año</label>
-        <input type="number" class="form-control" th:value="*{pelicula.getAnno()}" id="anno" name="anno"
-               placeholder="Escriba el año de estreno de la película" required="required">
+        <input type="number" class="form-control" th:value="${peliculaGuardada.getAnno()}" id="anno" name="anno"
+               placeholder="Escriba el año de estreno de la película" required="required" th:field="*{anno}">
     </div>
     <div class="mb-3">
         <label for="duracion" class="form-label">Duración</label>
-        <input type="number" class="form-control" th:value="*{pelicula.getDuracion()}" id="duracion" name="duracion"
-               placeholder="Escriba la duración de la película en minutos" required="required">
+        <input type="number" class="form-control" th:value="${peliculaGuardada.getDuracion()}" id="duracion" name="duracion"
+               placeholder="Escriba la duración de la película en minutos" required="required" th:field="*{duracion}">
     </div>
     <div class="mb-3">
         <label for="pais" class="form-label">País</label>
-        <input type="text" class="form-control" th:value="*{pelicula.getPais()}" id="pais" name="pais"
-               placeholder="Escriba el país de origen de la película" required="required">
+        <input type="text" class="form-control" th:value="${peliculaGuardada.getPais()}" id="pais" name="pais"
+               placeholder="Escriba el país de origen de la película" required="required" th:field="*{pais}">
     </div>
     <div class="mb-3">
         <label for="direccion" class="form-label">Dirección</label>
-        <input type="text" class="form-control" th:value="*{pelicula.getDireccion()}" id="direccion" name="direccion"
-               placeholder="Escriba el director de la película" required="required">
+        <input type="text" class="form-control" th:value="${peliculaGuardada.getDireccion()}" id="direccion" name="direccion"
+               placeholder="Escriba el director de la película" required="required" th:field="*{direccion}">
     </div>
     <div class="mb-3">
         <label for="genero" class="form-label">Género</label>
-        <input type="text" class="form-control" th:value="*{pelicula.getGenero()}" id="genero" name="genero"
-               placeholder="Escriba el/los género/s de la película" required="required">
+        <input type="text" class="form-control" th:value="${peliculaGuardada.getGenero()}" id="genero" name="genero"
+               placeholder="Escriba el/los género/s de la película" required="required" th:field="*{genero}">
     </div>
     <div class="mb-3">
         <label for="sinopsis" class="form-label">Sinopsis</label>
-        <textarea type="text" class="form-control" rows="5" th:text="*{pelicula.getSinopsis()}" id="sinopsis" name="sinopsis"
-                  placeholder="Escriba una sinopsis para la película (máximo 500 caracteres)" required="required"></textarea>
+        <textarea type="text" class="form-control" rows="5" th:text="${peliculaGuardada.getSinopsis()}" id="sinopsis" name="sinopsis"
+                  placeholder="Escriba una sinopsis para la película (máximo 500 caracteres)" required="required" th:field="*{sinopsis}"></textarea>
     </div>
     <div class="mb-3">
-        <label for="portada" class="form-label">Portada</label>
-        <input type="file" class="form-control" id="portada" name="portada" required="required">
+        <label for="file" class="form-label">Portada</label>
+        <div>
+            <img th:if="${peliculaGuardada.getPortada() != null && #strings.length(peliculaGuardada.getPortada()) > 0}" class="img-thumbnail rounded float-left"
+                 style="max-width: 25%;" th:src="@{'/peliculas/uploads/' + ${peliculaGuardada.getPortada()}}"
+                 th:alt="${peliculaGuardada.getPortada()}" />
+        </div>
+
+        <input type="file" class="form-control"  id="file" name="file">
+        <input type="hidden" th:field="*{portada}"/>
     </div>
     <div class="my-3">
         <button type="submit" class="btn btn-primary m-lg-0-3">Modificar</button>
         <a type="button" class="btn btn-secondary" th:href="@{'/peliculas/gestion'}">Volver</a>
+        <input type="hidden" th:field="*{id}"/>
     </div>
 </form>
 
