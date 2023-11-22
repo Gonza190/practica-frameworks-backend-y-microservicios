@@ -23,6 +23,12 @@ public class ActoresServiceImpl implements IActoresService {
 
 
     @Override
+    public List<Actor> buscarTodos(){
+        Actor[] actores = template.getForObject(URL_BASE, Actor[].class);
+        return Arrays.asList(actores);
+    }
+
+    @Override
     public Page<Actor> buscarTodos(Pageable pageable) {
 
         Actor[] actores = template.getForObject(URL_BASE, Actor[].class);

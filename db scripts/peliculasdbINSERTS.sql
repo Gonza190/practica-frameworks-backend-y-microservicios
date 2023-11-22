@@ -14,7 +14,11 @@ insert into actor (nombre, fecha_nacimiento, pais) values
 ('Owen Wilson', '1968-11-18','Estados Unidos'),
 ('Christian Bale', '1974-01-30','Reino Unido'),
 ('Willem Dafoe', '1955-07-22','Estados Unidos'),
-('Leonardo DiCaprio', '1974-11-11','Estados Unidos');
+('Leonardo DiCaprio', '1974-11-11','Estados Unidos'),
+('Mads Mikkelsen', '1965-11-22','Dinamarca'),
+('Daniel Craig', '1968-03-02','Reino Unido'),
+('Chris Evans', '1981-06-13','Estados Unidos'),
+('Mary Elizabeth Winstead', '1984-11-28','Estados Unidos');
 
 #PELICULAS
 insert into pelicula (titulo, anno, duracion, pais, direccion, genero, sinopsis, portada) values 
@@ -24,7 +28,11 @@ insert into pelicula (titulo, anno, duracion, pais, direccion, genero, sinopsis,
 ('Zoolander', 2001, 89, 'Estados Unidos', 'Ben Stiller', 'Comedia','Derek Zoolander (Stiller) ha sido el modelo masculino más cotizado durante los últimos tres años. La noche de la gala que podría suponer su cuarta corona, el galardón se lo lleva un nuevo modelo llamado Hansel (Wilson). Derek queda en entredicho y como un idiota, y decide retirarse. Sin embargo, un prestigioso diseñador le pide que desfile para él.','Zoolander.jpg'),
 ('American Psycho', 2000, 101, 'Estados Unidos', 'Mary Harron', 'Drama, Terror','En la década de 1980, Patrick Bateman es un exitoso "yuppie" obsesionado por la competencia y por la perfección material, que utiliza los más caros cosméticos masculinos, equipos de gimnasia, solárium y demás maquinaria estética para lograr un cuerpo atlético y bien acicalado, identificador material del éxito social.','American Psycho.jpg'),
 ('El lobo de Wall Street', 2013, 179, 'Estados Unidos', 'Martin Scorsese', 'Comedia, Drama','La historia del corredor de bolsa neoyorquino Jordan Belfort, quien, con poco más de veinte años, fue apodado "el lobo de Wall Street" por su enorme éxito y fortuna como fundador de la agencia bursátil Stratton Oakmont.','El lobo de wall street.jpg'),
-('La La Land', 2016, 127, 'Estados Unidos', 'Damien Chazelle', 'Musical, Romance, Comedia, Drama','Mia (Emma Stone), una joven aspirante a actriz que trabaja como camarera mientras acude a castings, y Sebastian (Ryan Gosling), un pianista de jazz que se gana la vida tocando en sórdidos tugurios, se enamoran, pero su gran ambición por llegar a la cima en sus carreras artísticas amenaza con separarlos.','La La Land.jpg');
+('La La Land', 2016, 127, 'Estados Unidos', 'Damien Chazelle', 'Musical, Romance, Comedia, Drama','Mia (Emma Stone), una joven aspirante a actriz que trabaja como camarera mientras acude a castings, y Sebastian (Ryan Gosling), un pianista de jazz que se gana la vida tocando en sórdidos tugurios, se enamoran, pero su gran ambición por llegar a la cima en sus carreras artísticas amenaza con separarlos.','La La Land.jpg'),
+('La caza', 2012, 111, 'Dinamarca', 'Thomas Vinterberg', 'Drama','Tras un divorcio difícil, Lucas, un hombre de cuarenta años, ha encontrado una nueva novia, un nuevo trabajo y trata de reconstruir su relación con Marcus, su hijo adolescente. Pero algo empieza a ir mal: un detalle cualquiera, un comentario inocente y una mentira insignificante que se extiende como un virus invisible sembrando el estupor y la desconfianza en una pequeña población.','La caza.jpg'),
+('Casino Royale', 2006, 144, 'Reino Unido', 'Martin Campbell', 'Acción, Thriller','La primera misión del agente británico James Bond como agente 007 lo lleva hasta Le Chiffre, banquero de los terroristas de todo el mundo. Para detenerlo y desmantelar la red de terrorismo, Bond debe derrotarlo en una arriesgada partida de póquer en el Casino Royale.','Casino Royale.jpg'),
+('Scott Pilgrim contra el mundo', 2010, 112, 'Estados Unidos', 'Edgar Wright', 'Comedia, Acción, Romance','Scott Pilgrim es un joven que conoce a la mujer de sus sueños, Ramona V. Flowers. Pero para conquistar su corazón, deberá primero luchar y vencer a sus siete malvadas exparejas, misión harto complicada, pues tienen poderes especiales... ','Scott Pilgrim contra el mundo.jpg'),
+('Puñales por la espalda', 2019, 130, 'Estados Unidos', 'Rian Johnson', 'Thriller','Un misterio moderno en el que un grupo de investigadores ha de descubrir al responsable del asesinato del patriarca de una excéntrica familia.','Puñales por la espalda.jpg');
 
 
 #PELICULAS_ACTORES
@@ -50,11 +58,17 @@ insert into peliculasactores values
 (6,5),
 (6,9),
 (7,1),
-(7,8);
+(7,8),
+(8,16),
+(9,16),
+(9,17),
+(10,7),
+(10,18),
+(10,19),
+(11,2),
+(11,17),
+(11,18);
 
-
-
-select * from pelicula;
 #Consulta para ver los actores y peliculas que hay relacionados
 #select titulo, nombre, pelicula_id, actor_id from peliculasactores join actor on actor.id=actor_id join pelicula on pelicula.id = pelicula_id
 #select * from peliculasactores

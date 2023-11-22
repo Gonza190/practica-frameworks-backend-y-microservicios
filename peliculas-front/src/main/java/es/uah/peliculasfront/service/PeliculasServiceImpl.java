@@ -1,5 +1,6 @@
 package es.uah.peliculasfront.service;
 
+import es.uah.peliculasfront.model.Actor;
 import es.uah.peliculasfront.model.Pelicula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,11 +14,17 @@ import java.net.URL;
 import java.util.*;
 
 @Service
-public class PeliculasServiceImpl implements IPeliculasService{
+public class PeliculasServiceImpl implements IPeliculasService {
 
     @Autowired
     RestTemplate template;
     String URL_BASE = "http://localhost:8001/peliculas";
+
+    @Override
+    public List<Pelicula> buscarTodas() {
+        Pelicula[] peliculas = template.getForObject(URL_BASE, Pelicula[].class);
+        return Arrays.asList(peliculas);
+    }
 
     @Override
     public Page<Pelicula> buscarTodas(Pageable pageable) {
@@ -30,14 +37,14 @@ public class PeliculasServiceImpl implements IPeliculasService{
 
         List<Pelicula> list;
 
-        if(peliculasList.size()<startItem){
+        if (peliculasList.size() < startItem) {
             list = Collections.emptyList();
-        }else{
-            int toIndex = Math.min(startItem+pageSize, peliculasList.size());
+        } else {
+            int toIndex = Math.min(startItem + pageSize, peliculasList.size());
             list = peliculasList.subList(startItem, toIndex);
         }
 
-        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize), peliculasList.size());
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), peliculasList.size());
         return page;
 
     }
@@ -45,11 +52,7 @@ public class PeliculasServiceImpl implements IPeliculasService{
     @Override
     public Pelicula buscarPeliculaPorId(Integer id) {
 
-        Pelicula pelicula = template.getForObject(URL_BASE + "/" +id, Pelicula.class);
-        //System.out.println(pelicula.getPortada());
-        //String decoded = new String(Base64.getDecoder().decode(pelicula.getPortada()));
-        //System.out.println("-----------------------");
-        //System.out.println(decoded);
+        Pelicula pelicula = template.getForObject(URL_BASE + "/" + id, Pelicula.class);
         return pelicula;
     }
 
@@ -64,14 +67,14 @@ public class PeliculasServiceImpl implements IPeliculasService{
 
         List<Pelicula> list;
 
-        if(peliculasList.size()<startItem){
+        if (peliculasList.size() < startItem) {
             list = Collections.emptyList();
-        }else{
-            int toIndex = Math.min(startItem+pageSize, peliculasList.size());
+        } else {
+            int toIndex = Math.min(startItem + pageSize, peliculasList.size());
             list = peliculasList.subList(startItem, toIndex);
         }
 
-        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize), peliculasList.size());
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), peliculasList.size());
         return page;
     }
 
@@ -86,14 +89,14 @@ public class PeliculasServiceImpl implements IPeliculasService{
 
         List<Pelicula> list;
 
-        if(peliculasList.size()<startItem){
+        if (peliculasList.size() < startItem) {
             list = Collections.emptyList();
-        }else{
-            int toIndex = Math.min(startItem+pageSize, peliculasList.size());
+        } else {
+            int toIndex = Math.min(startItem + pageSize, peliculasList.size());
             list = peliculasList.subList(startItem, toIndex);
         }
 
-        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize), peliculasList.size());
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), peliculasList.size());
         return page;
     }
 
@@ -108,14 +111,14 @@ public class PeliculasServiceImpl implements IPeliculasService{
 
         List<Pelicula> list;
 
-        if(peliculasList.size()<startItem){
+        if (peliculasList.size() < startItem) {
             list = Collections.emptyList();
-        }else{
-            int toIndex = Math.min(startItem+pageSize, peliculasList.size());
+        } else {
+            int toIndex = Math.min(startItem + pageSize, peliculasList.size());
             list = peliculasList.subList(startItem, toIndex);
         }
 
-        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage,pageSize), peliculasList.size());
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), peliculasList.size());
         return page;
     }
 
@@ -141,9 +144,9 @@ public class PeliculasServiceImpl implements IPeliculasService{
     @Override
     public void guardarPelicula(Pelicula pelicula) {
 
-        if(pelicula.getId() != null && pelicula.getId()>0){
+        if (pelicula.getId() != null && pelicula.getId() > 0) {
             template.put(URL_BASE, pelicula);
-        }else {
+        } else {
             pelicula.setId(0);
             template.postForObject(URL_BASE, pelicula, String.class);
         }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IPeliculasService {
 
+    List<Pelicula> buscarTodas();
     Page<Pelicula> buscarTodas(Pageable pageable);
     Pelicula buscarPeliculaPorId(Integer id);
     //busqueda con paginacion
