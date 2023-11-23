@@ -3,6 +3,8 @@ package es.uah.peliculas.dao;
 import es.uah.peliculas.model.Actor;
 import es.uah.peliculas.model.Pelicula;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

@@ -74,3 +74,4 @@ insert into peliculasactores values
 #select * from peliculasactores
 #select * from pelicula
 #select * from actor
+

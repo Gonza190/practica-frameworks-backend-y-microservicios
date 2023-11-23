@@ -39,7 +39,11 @@ public class Pelicula {
     private String portada;
 
     //Relacion @ManyToMany hecha a mano
-    @ManyToMany(mappedBy = "peliculas")
+    @ManyToMany
+    @JoinTable(name="peliculasActores",
+            joinColumns = {@JoinColumn(name = "pelicula_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_id", referencedColumnName = "id")}
+            )
     @JsonIgnoreProperties("peliculas")
     private List<Actor> actores;
 

@@ -24,7 +24,7 @@ public class Actor {
     private String pais;
 
     //Relacion @ManyToMany hecha a mano
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name="peliculasActores",
             joinColumns = {@JoinColumn(name = "actor_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "pelicula_id", referencedColumnName = "id")})

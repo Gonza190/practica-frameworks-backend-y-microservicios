@@ -72,15 +72,23 @@ public class PeliculasDAOImp implements IPeliculasDAO{
         if(optional.isPresent()){
             Pelicula pelicula = optional.get();
             List<Actor> actores = pelicula.getActores();
+            System.out.println(actores.toString());
+
+            actores.remove(pelicula);
+
+            /*
             for(Actor actor: actores){
-                actores.remove(pelicula);
+                pelicula.removeActor(actor);
             }
+            */
+
 
             peliculasJPA.deleteById(idPelicula);
         }
 
 
     }
+
 
     @Override
     public void actualizarPelicula(Pelicula pelicula) {
