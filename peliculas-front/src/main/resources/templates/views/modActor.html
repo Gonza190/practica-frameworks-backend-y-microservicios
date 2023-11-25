@@ -16,7 +16,7 @@
                 placeholder="Escriba el nombre del actor" required="required" th:field="*{nombre}">
     </div>
     <div class="mb-3">
-        <label for="fecha" class="form-label">Año</label>
+        <label for="fecha" class="form-label">Fecha de nacimiento</label>
         <input type="date" class="form-control" th:value="${actorGuardado.getFechaNacimiento()}" id="fecha" name="fecha"
                placeholder="Escriba la fecha de nacimiento del actor" required="required" th:field="*{fechaNacimiento}">
     </div>
