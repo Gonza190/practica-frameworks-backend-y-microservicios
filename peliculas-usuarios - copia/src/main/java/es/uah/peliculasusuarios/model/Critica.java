@@ -10,10 +10,10 @@ import java.util.Objects;
 public class Critica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idcritica")
+    @Column(name = "idCritica")
     private Integer idCritica;
     @Basic
-    @Column(name = "idpelicula")
+    @Column(name = "idPelicula")
     private Integer idPelicula;
     @Basic
     @Column(name = "valoracion")
@@ -25,11 +25,11 @@ public class Critica {
     @Column(name = "fecha")
     private Date fecha;
     @Basic
-    @Column(name = "usuarios_idusuario")
+    @Column(name = "Usuarios_idUsuario")
     private Integer usuariosIdUsuario;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "idusuario")
+    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
     @JsonIgnoreProperties("criticas")
     private Usuario usuario;
 

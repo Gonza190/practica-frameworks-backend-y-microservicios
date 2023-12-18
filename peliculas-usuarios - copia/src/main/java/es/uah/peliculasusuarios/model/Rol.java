@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idrol")
+    @Column(name = "idRol")
     private Integer idRol;
     @Basic
     @Column(name = "authority")

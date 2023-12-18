@@ -28,8 +28,8 @@ public class Usuario {
 
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(name = "usuarios_tiene_authorities",
-            joinColumns = @JoinColumn(referencedColumnName = "idUsuario"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "idRol"))
+            joinColumns = @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario"),
+            inverseJoinColumns = @JoinColumn(name = "idRol", referencedColumnName = "idRol"))
     private List<Rol> rols = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
