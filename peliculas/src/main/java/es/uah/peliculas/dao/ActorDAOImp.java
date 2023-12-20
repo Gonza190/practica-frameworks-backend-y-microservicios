@@ -68,7 +68,7 @@ public class ActorDAOImp implements IActoresDAO{
     @Override
     @Transactional
     /**
-     * En este método se ha tenido que ser harcodear la consulta debido a que al ejecutar el método saltaba un error,
+     * En este método se ha tenido que ser hardcodear la consulta debido a que al ejecutar el método saltaba un error,
      * ya que decía que la fila que se estaba intentando añadir ya existía, cuando no era cierto al comprobarlo en
      * la base de datos.
      *
