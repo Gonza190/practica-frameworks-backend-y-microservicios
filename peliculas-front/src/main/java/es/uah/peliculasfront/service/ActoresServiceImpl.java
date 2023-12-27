@@ -19,7 +19,9 @@ public class ActoresServiceImpl implements IActoresService {
 
     @Autowired
     RestTemplate template;
-    String URL_BASE = "http://localhost:8001/actores";
+    //String URL_BASE = "http://localhost:8001/actores";    //URL antes del gateway
+    String URL_BASE = "http://localhost:8090/api/peliculas/actores";
+
 
 
     @Override

@@ -18,7 +18,9 @@ public class PeliculasServiceImpl implements IPeliculasService {
 
     @Autowired
     RestTemplate template;
-    String URL_BASE = "http://localhost:8001/peliculas";
+    //String URL_BASE = "http://localhost:8001/peliculas";  //URL antes del gateway
+    String URL_BASE = "http://localhost:8090/api/peliculas/peliculas";
+
 
     @Override
     public List<Pelicula> buscarTodas() {
