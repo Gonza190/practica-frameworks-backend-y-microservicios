@@ -53,4 +53,9 @@ public class UsuariosServiceImpl implements IUsuariosService {
         usuariosDAO.eliminarCritica(idUsuario, idCritica);
     }
 
+    @Override
+    public Usuario buscarUsuarioPorCorreoPassword(String correo, String clave) {
+        return usuariosDAO.buscarUsuarioPorCorreoPassword(correo, clave);
+    }
+
 }

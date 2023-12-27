@@ -76,4 +76,13 @@ public class UsuariosDAOImpl implements IUsuariosDAO {
         criticasJPA.deleteById(idCritica);
     }
 
+    @Override
+    public Usuario buscarUsuarioPorCorreoPassword(String correo, String password){
+        Optional<Usuario> optional = Optional.ofNullable(usuariosJPA.findByCorreoAndPassword(correo,password));
+        if (optional.isPresent()){
+            return optional.get();
+        }
+        return null;
+    }
+
 }

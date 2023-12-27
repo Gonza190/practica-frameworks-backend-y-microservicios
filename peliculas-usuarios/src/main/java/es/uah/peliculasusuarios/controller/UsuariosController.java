@@ -48,4 +48,11 @@ public class UsuariosController {
         usuariosService.eliminarUsuario(id);
     }
 
+    @GetMapping("/usuarios/login/{correo}/{password}")
+    public Usuario buscarUsuarioPorCorreoConClave(@PathVariable("correo") String correo,
+                                                  @PathVariable("password") String password) {
+        return usuariosService.buscarUsuarioPorCorreoPassword(correo, password);
+    }
+
+
 }
