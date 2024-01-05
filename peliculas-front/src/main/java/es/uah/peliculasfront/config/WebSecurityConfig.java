@@ -30,9 +30,9 @@ public class WebSecurityConfig {
         http
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
-                        .defaultSuccessUrl("/ccursos", true))
+                        .defaultSuccessUrl("/home", true))
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/js/**", "/css/**", "/login", "/cusuarios/registrar").permitAll()
+                        .requestMatchers("/js/**", "/css/**", "/login", "/usuarios/registrar").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

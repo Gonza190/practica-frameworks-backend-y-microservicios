@@ -20,6 +20,10 @@ public class Critica {
         this.usuario = usuario;
     }
 
+    public Critica() {
+
+    }
+
     public Integer getIdCritica() {
         return idCritica;
     }

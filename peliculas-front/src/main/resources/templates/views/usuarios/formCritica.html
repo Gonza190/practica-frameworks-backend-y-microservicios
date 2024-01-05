@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmInfinity</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h2 th:text="${titulo}"
+        class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h2>
+    <form th:action="@{/cmatriculas/guardar/}" method="post" th:object="${matricula}">
+        <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
+            Por favor corrija los siguientes errores:
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <label for="idCurso" class="form-label">idCurso</label>
+            <input type="text" class="form-control" th:field="*{idCurso}" id="idCurso" name="idCurso"
+                   placeholder="Escriba el identificador del curso" required="required">
+        </div>
+<!--        <div class="mb-3">-->
+<!--            <label for="fecha" class="form-label">Fecha</label>-->
+<!--            <input type="date" class="form-control" th:field="*{fecha}" id="fecha" name="fecha"-->
+<!--                   placeholder="Escriba la fecha de la matricula" required="required">-->
+<!--        </div>-->
+        <div class="mb-3">
+            <label for="idUsuario" class="form-label">idUsuario</label>
+            <input type="number" class="form-control" th:field="*{usuario.idUsuario}" id="idUsuario" name="idUsuario"
+                   placeholder="Escriba el idUsuario" required="required">
+        </div>
+
+        <button type="submit" class="btn btn-dark">Guardar</button>
+        <input type="hidden" th:field="*{idMatricula}"/>
+    </form>
+    <hr>
+    <a class="btn btn-primary" role="button" th:href="@{/ccursos/}">Ir a Inicio</a>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

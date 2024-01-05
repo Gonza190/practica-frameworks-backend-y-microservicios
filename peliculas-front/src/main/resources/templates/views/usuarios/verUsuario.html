@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmInfinity</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container py-4">
+    <div class="card bg-light">
+        <div class="card-header" th:text="${titulo}"></div>
+        <div class="card-body">
+
+            <ul class="list-group">
+                <li class="list-group-item active" th:text="${usuario.idUsuario}"></li>
+                <li class="list-group-item" th:text="${usuario.nombre}"></li>
+                <li class="list-group-item" th:text="${usuario.clave}"></li>
+                <li class="list-group-item" th:text="${usuario.correo}"></li>
+                <li class="list-group-item" th:text="${usuario.roles}"></li>
+            </ul>
+
+        </div>
+    </div>
+    <hr>
+    <a class="btn btn-primary" role="button" th:href="@{/usuarios/listado}">Volver al listado de usuarios</a>
+</div>
+
+</body>
+</html>

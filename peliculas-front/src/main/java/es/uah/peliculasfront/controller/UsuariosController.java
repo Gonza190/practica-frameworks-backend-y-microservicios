@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cusuarios")
+@RequestMapping("/usuarios")
 public class UsuariosController {
     @Autowired
     IUsuariosService usuariosService;
