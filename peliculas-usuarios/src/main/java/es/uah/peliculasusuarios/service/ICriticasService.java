@@ -16,4 +16,5 @@ public interface ICriticasService {
 
     void eliminarCritica(Integer idCritica);
 
+
 }

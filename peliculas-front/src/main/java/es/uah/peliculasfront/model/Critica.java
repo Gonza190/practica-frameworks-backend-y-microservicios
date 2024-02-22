@@ -2,6 +2,7 @@ package es.uah.peliculasfront.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Critica {
@@ -11,10 +12,10 @@ public class Critica {
     private Integer idPelicula;
     private String valoracion;
     private Integer nota;
-    private Date fecha;
+    private LocalDate fecha;
     private Usuario usuario;
 
-    public Critica(Integer idCritica, Integer idPelicula, String valoracion, Integer nota, Date fecha, Usuario usuario) {
+    public Critica(Integer idCritica, Integer idPelicula, String valoracion, Integer nota, LocalDate fecha, Usuario usuario) {
         this.idCritica = idCritica;
         this.idPelicula = idPelicula;
         this.valoracion = valoracion;
@@ -59,11 +60,11 @@ public class Critica {
         this.nota = nota;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

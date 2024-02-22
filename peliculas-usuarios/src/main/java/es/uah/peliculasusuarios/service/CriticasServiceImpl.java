@@ -38,4 +38,6 @@ public class CriticasServiceImpl implements ICriticasService {
         criticasDAO.eliminarCritica(idCritica);
     }
 
+
+
 }

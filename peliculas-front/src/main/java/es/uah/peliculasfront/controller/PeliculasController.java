@@ -215,12 +215,12 @@ public class PeliculasController {
         return formateado;
     }
 
-    private int notaMediaPelicula(int idPelicula){
+    private double notaMediaPelicula(int idPelicula){
 
         Pageable pageable = PageRequest.of(0, 20);
         Page<Critica> listado = criticasService.buscarCriticasPorIdPelicula(idPelicula,pageable);
 
-        int suma=0;
+        double suma=0;
         for(int i=0;i<listado.getContent().size();i++){
             suma = suma + listado.getContent().get(i).getNota();
         }

@@ -32,6 +32,7 @@ public class CriticasDAOImpl implements ICriticasDAO {
         return null;
     }
 
+
     @Override
     public void guardarCritica(Critica critica) {
         criticasJPA.save(critica);

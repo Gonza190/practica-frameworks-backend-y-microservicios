@@ -82,39 +82,20 @@ public class CriticasServiceImpl implements ICriticasService {
 
     @Override
     public String guardarCritica(Critica critica) {
-        /**
-         * Modificar este método más adelante
 
         if (critica.getIdCritica() != null && critica.getIdCritica() > 0) {
-            return "No se puede modificar una matrícula.";
+            template.put(url, critica);
+
         } else {
-            //Inscribimos al actor en la pelicula
+
             Usuario usuario = usuariosService.buscarUsuarioPorId(critica.getUsuario().getIdUsuario());
-            Actor actor = actoresService.buscarActorPorCorreo(usuario.getCorreo());
-            Pelicula pelicula = peliculasService.buscarPeliculaPorId(critica.getIdPelicula());
-            String resultado="";
-            //si no existe el actor, lo creamos
-            if(actor == null) {
-                actor = new Ac(usuario.getNombre(), usuario.getCorreo());
-                alumnosService.guardarAlumno(alumno);
-                resultado = "Alumno creado. ";
-            } else { //si existe, comprobamos que no se matricula dos veces en el mismo curso
-                resultado = "Alumno encontrado. ";
-                List<Curso> cursos = alumno.getCursos();
-                if (cursos.contains(curso)) {
-                    return "El alumno ya existe en el curso!";
-                }
-            }
-            alumnosService.inscribirCurso(alumno.getIdAlumno(), matricula.getIdCurso());
-            //Guardamos la matrícula
-            matricula.setPrecio(curso.getPrecio());
-            matricula.setIdMatricula(0);
-            matricula.setFecha(new Date());
-            template.postForObject(url, matricula, String.class);
-            return resultado + "Los datos de la matricula fueron guardados!";
+            critica.setUsuario(usuario);
+            critica.setIdCritica(0);
+            template.postForObject(url, critica, String.class);
         }
-         */
-        return "";
+
+
+        return "Crítica guardada";
     }
 
     @Override

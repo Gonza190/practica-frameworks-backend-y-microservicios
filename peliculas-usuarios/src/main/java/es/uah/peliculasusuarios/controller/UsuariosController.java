@@ -1,11 +1,13 @@
 package es.uah.peliculasusuarios.controller;
 
+import es.uah.peliculasusuarios.model.Critica;
 import es.uah.peliculasusuarios.model.Rol;
 import es.uah.peliculasusuarios.model.Usuario;
 import es.uah.peliculasusuarios.service.IUsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,6 +43,11 @@ public class UsuariosController {
 
     @PutMapping("/usuarios")
     public void actualizarUsuario(@RequestBody Usuario usuario) {
+
+        //Las críticas se borran
+        Usuario old = usuariosService.buscarUsuarioPorId(usuario.getId());
+        usuario.setCriticas(old.getCriticas());
+
         usuariosService.actualizarUsuario(usuario);
     }
 

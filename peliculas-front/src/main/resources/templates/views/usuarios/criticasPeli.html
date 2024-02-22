@@ -14,7 +14,7 @@
     <div class="card-body">
       <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
       <h4 class="card-title">
-        <a th:href="@{/criticas/nuevo}" class="btn btn-primary btn-xs">Crear nueva crítica</a>
+        <a th:href="@{'/criticas/nueva/' + ${pelicula.getId()}}" class="btn btn-primary btn-xs">Crear nueva crítica</a>
       </h4>
       <table class="table table-hover">
         <thead class="thead-light">
@@ -30,7 +30,7 @@
         <tr th:each="critica : ${listadoCriticas}">
           <td th:text="${critica.getValoracion()}"></td>
           <td th:text="${critica.getNota()}"></td>
-          <td th:text="${#dates.format(critica.fecha, 'dd-MM-yyyy')}"></td>
+          <td th:text="${#temporals.format(critica.fecha, 'dd-MM-yyyy')}"></td>
           <td th:text="${critica.usuario.idUsuario}"></td>
         </tr>
 

@@ -1,5 +1,6 @@
 package es.uah.peliculasfront.controller;
 
+import es.uah.peliculasfront.config.CustomAuthenticationProvider;
 import es.uah.peliculasfront.model.Critica;
 import es.uah.peliculasfront.model.Pelicula;
 import es.uah.peliculasfront.model.Usuario;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/criticas")
@@ -52,7 +56,7 @@ public class CriticasController {
         Page<Critica> listado = criticasService.buscarCriticasPorIdPelicula(idPelicula,pageable);
         PageRender<Critica> pageRender = new PageRender<Critica>("/criticas/{idPelicula}", listado);
         Pelicula pelicula = peliculasService.buscarPeliculaPorId(idPelicula);
-        model.addAttribute("película", pelicula);
+        model.addAttribute("pelicula", pelicula);
         model.addAttribute("titulo", "Críticas de la película: " + pelicula.getTitulo());
         model.addAttribute("listadoCriticas", listado);
         model.addAttribute("page", pageRender);
@@ -60,20 +64,32 @@ public class CriticasController {
 
     }
 
-    @GetMapping("/nuevo")
-    public String nuevo(Model model) {
+    @GetMapping("/nueva/{idPelicula}")
+    public String nuevo(Model model,@PathVariable("idPelicula") Integer idPelicula) {
+
         Critica critica = new Critica();
-        model.addAttribute("titulo", "Nueva critica");
+        Pelicula pelicula = peliculasService.buscarPeliculaPorId(idPelicula);
+        model.addAttribute("pelicula", pelicula);
+        model.addAttribute("titulo", "Nueva critica para la película: " + pelicula.getTitulo());
         model.addAttribute("critica", critica);
         return "views/usuarios/formCritica";
     }
 
     @PostMapping("/guardar/")
-    public String guardarCritica(Model model, Critica critica, RedirectAttributes attributes) {
+    public String guardarCritica(Model model, Critica critica, RedirectAttributes attributes,
+                                 @RequestParam("idPeli") int idPelicula) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Critica c = criticasService.buscarCriticaPorId(1);
+
+
+        critica.setFecha(c.getFecha());
+        critica.setIdPelicula(idPelicula);
         String resultado = criticasService.guardarCritica(critica);
         model.addAttribute("titulo", "Nueva critica");
         attributes.addFlashAttribute("msg", resultado);
-        return "redirect:/matriculas/listado";
+        return "redirect:/criticas/listado";
     }
 
     @GetMapping("/criticar/{idPelicula}")

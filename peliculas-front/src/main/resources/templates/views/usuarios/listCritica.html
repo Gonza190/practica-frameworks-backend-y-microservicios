@@ -13,9 +13,7 @@
         <h2 th:text="${titulo}" class="card-header"></h2>
         <div class="card-body">
             <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
-            <h4 class="card-title">
-                <a th:href="@{/criticas/nuevo}" class="btn btn-primary btn-xs">Crear nueva crítica</a>
-            </h4>
+
             <table class="table table-hover">
                 <thead class="thead-light">
                 <tr>
@@ -33,7 +31,7 @@
                     <td th:text="${critica.getIdPelicula()}"></td>
                     <td th:text="${critica.getValoracion()}"></td>
                     <td th:text="${critica.getNota()}"></td>
-                    <td th:text="${#dates.format(critica.fecha, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${#temporals.format(critica.fecha, 'dd-MM-yyyy')}"></td>
                     <td th:text="${critica.usuario.idUsuario}"></td>
                     <td>
                         <a th:href="@{/criticas/borrar/{id}  (id=${critica.idCritica})   }" th:text="'Borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar el usuario."><i class="fas fa-trash" aria-hidden="true"></i></a>
