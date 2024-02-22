@@ -1,9 +1,11 @@
 package es.uah.peliculasfront.controller;
 
 import es.uah.peliculasfront.model.Actor;
+import es.uah.peliculasfront.model.Critica;
 import es.uah.peliculasfront.model.Pelicula;
 import es.uah.peliculasfront.model.PeliculasActores;
 import es.uah.peliculasfront.paginator.PageRender;
+import es.uah.peliculasfront.service.ICriticasService;
 import es.uah.peliculasfront.service.IPeliculasService;
 import es.uah.peliculasfront.service.IUploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class PeliculasController {
 
     @Autowired
     private IUploadFileService uploadFileService;
+
+    @Autowired
+    private ICriticasService criticasService;
 
     @GetMapping("")
     public String listadoPeliculas(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
@@ -69,6 +74,7 @@ public class PeliculasController {
         model.addAttribute("pelicula", pelicula);
         String actores = formatearActores(pelicula);
         model.addAttribute("actores", actores);
+        model.addAttribute("nota",notaMediaPelicula(pelicula.getId()));
         return "views/infoPelicula";
 
     }
@@ -207,6 +213,21 @@ public class PeliculasController {
             formateado += pelicula.getActores().get(pelicula.getActores().size() - 1).getNombre();
         }
         return formateado;
+    }
+
+    private int notaMediaPelicula(int idPelicula){
+
+        Pageable pageable = PageRequest.of(0, 20);
+        Page<Critica> listado = criticasService.buscarCriticasPorIdPelicula(idPelicula,pageable);
+
+        int suma=0;
+        for(int i=0;i<listado.getContent().size();i++){
+            suma = suma + listado.getContent().get(i).getNota();
+        }
+        if(suma==0){
+            return 0;
+        }
+        return suma/listado.getContent().size();
     }
 
 

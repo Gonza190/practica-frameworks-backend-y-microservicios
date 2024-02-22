@@ -23,5 +23,4 @@ public interface IUsuariosService {
     void eliminarCritica(Integer idUsuario, Integer idCritica);
 
     Usuario buscarUsuarioPorCorreoPassword(String correo, String password);
-
 }

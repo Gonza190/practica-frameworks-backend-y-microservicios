@@ -14,30 +14,30 @@
         <div class="card-body">
             <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
             <h4 class="card-title">
-                <a th:href="@{/cmatriculas/nuevo}" class="btn btn-primary btn-xs">Crear nueva matricula</a>
+                <a th:href="@{/criticas/nuevo}" class="btn btn-primary btn-xs">Crear nueva crítica</a>
             </h4>
             <table class="table table-hover">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">Identificador</th>
-                    <th scope="col">Curso</th>
-                    <th scope="col">Precio</th>
+                    <th scope="col">Película</th>
+                    <th scope="col">Valoración</th>
+                    <th scope="col">Nota</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Usuario</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="matricula : ${listadoMatriculas}">
-                    <td th:text="${matricula.idMatricula}"></td>
-                    <td th:text="${matricula.idCurso}"></td>
-                    <td th:text="${matricula.precio}"></td>
-                    <td th:text="${#dates.format(matricula.fecha, 'dd-MM-yyyy')}"></td>
-                    <td th:text="${matricula.usuario.idUsuario}"></td>
-
-<!--                    <td>-->
-<!--                        <a th:href="@{/cmatriculas/editar/{id}  (id=${matricula.idMatricula})  }" th:text="'editar'" class="btn btn-success btn-sm" role="button" title="Editar alumno."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>-->
-<!--                        <a th:href="@{/cmatriculas/borrar/{id}  (id=${matricula.idMatricula})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar alumno."><i class="fas fa-trash" aria-hidden="true"></i></a>-->
-<!--                    </td>-->
+                <tr th:each="critica : ${listadoCriticas}">
+                    <td th:text="${critica.getIdCritica()}"></td>
+                    <td th:text="${critica.getIdPelicula()}"></td>
+                    <td th:text="${critica.getValoracion()}"></td>
+                    <td th:text="${critica.getNota()}"></td>
+                    <td th:text="${#dates.format(critica.fecha, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${critica.usuario.idUsuario}"></td>
+                    <td>
+                        <a th:href="@{/criticas/borrar/{id}  (id=${critica.idCritica})   }" th:text="'Borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar el usuario."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    </td>
                 </tr>
 
                 </tbody>
@@ -48,7 +48,7 @@
         </div>
     </div>
     <hr>
-    <a class="btn btn-primary" role="button" th:href="@{/ccursos/}">Ir a Inicio</a>
+    <a class="btn btn-primary" role="button" th:href="@{/home}">Ir a Inicio</a>
 </div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript

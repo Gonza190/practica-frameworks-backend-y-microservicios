@@ -1,5 +1,6 @@
 package es.uah.peliculasusuarios.controller;
 
+import es.uah.peliculasusuarios.model.Rol;
 import es.uah.peliculasusuarios.model.Usuario;
 import es.uah.peliculasusuarios.service.IUsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;

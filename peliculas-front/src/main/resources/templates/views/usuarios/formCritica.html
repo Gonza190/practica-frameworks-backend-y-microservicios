@@ -10,7 +10,7 @@
 <div class="container">
     <h2 th:text="${titulo}"
         class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h2>
-    <form th:action="@{/cmatriculas/guardar/}" method="post" th:object="${matricula}">
+    <form th:action="@{/criticas/guardar/}" method="post" th:object="${critica}">
         <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
             Por favor corrija los siguientes errores:
             <ul>
@@ -18,9 +18,9 @@
             </ul>
         </div>
         <div class="mb-3">
-            <label for="idCurso" class="form-label">idCurso</label>
-            <input type="text" class="form-control" th:field="*{idCurso}" id="idCurso" name="idCurso"
-                   placeholder="Escriba el identificador del curso" required="required">
+            <label for="idPelicula" class="form-label">idPelicula</label>
+            <input type="text" class="form-control" th:field="*{idPelicula}" id="idPelicula" name="idPelicula"
+                   placeholder="Escriba el identificador de la película" required="required">
         </div>
 <!--        <div class="mb-3">-->
 <!--            <label for="fecha" class="form-label">Fecha</label>-->
@@ -34,10 +34,10 @@
         </div>
 
         <button type="submit" class="btn btn-dark">Guardar</button>
-        <input type="hidden" th:field="*{idMatricula}"/>
+        <input type="hidden" th:field="*{idCritica}"/>
     </form>
     <hr>
-    <a class="btn btn-primary" role="button" th:href="@{/ccursos/}">Ir a Inicio</a>
+    <a class="btn btn-primary" role="button" th:href="@{/home}">Ir a Inicio</a>
 </div>
 
 <!-- Bootstrap core JavaScript

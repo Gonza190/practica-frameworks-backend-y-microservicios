@@ -10,7 +10,7 @@
 <div class="container">
     <h2 th:text="${titulo}"
         class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h2>
-    <form th:action="@{/usuarios/guardar/}" method="post" th:object="${usuario}">
+    <form th:action="@{/usuarios/actualizar}" method="post" th:object="${usuario}">
         <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
             Por favor corrija los siguientes errores:
             <ul>

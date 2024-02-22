@@ -9,14 +9,13 @@
 <body>
 
 <div class="container">
-
     <div class="card">
         <h2 th:text="${titulo}" class="card-header"></h2>
         <div class="card-body">
             <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
             <div th:if="${msga != null}" class='alert alert-danger' th:text="${msga}" role='alert'></div>
             <h4 class="card-title">
-                <a th:href="@{/cusuarios/nuevo}" class="btn btn-primary btn-xs">Crear usuario nuevo</a>
+                <a th:href="@{/usuarios/nuevo}" class="btn btn-primary btn-xs">Crear usuario nuevo</a>
             </h4>
             <table class="table table-hover">
                 <thead class="thead-light">
@@ -44,8 +43,8 @@
                         </table>
                     </td>
                     <td sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/usuarios/editar/{id}  (id=${usuario.idUsuario})  }" th:text="'editar'" class="btn btn-success btn-sm" role="button" title="Editar el usuario."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                        <a th:href="@{/usuarios/borrar/{id}  (id=${usuario.idUsuario})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar el usuario."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                        <a th:href="@{/usuarios/editar/{id}  (id=${usuario.idUsuario})  }" th:text="'Editar'" class="btn btn-success btn-sm" role="button" title="Editar el usuario."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                        <a th:href="@{/usuarios/borrar/{id}  (id=${usuario.idUsuario})   }" th:text="'Borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar el usuario."><i class="fas fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>
 
@@ -57,7 +56,7 @@
         </div>
     </div>
     <hr>
-    <a class="btn btn-primary" role="button" th:href="@{/home/}">Ir a Inicio</a>
+    <a class="btn btn-primary" role="button" th:href="@{/home}">Ir a Inicio</a>
 </div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript

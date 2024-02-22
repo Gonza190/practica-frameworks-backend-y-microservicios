@@ -1,9 +1,12 @@
 package es.uah.peliculasfront.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class Critica {
 
+    @JsonProperty("id")
     private Integer idCritica;
     private Integer idPelicula;
     private String valoracion;

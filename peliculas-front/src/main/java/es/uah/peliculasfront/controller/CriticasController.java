@@ -1,9 +1,11 @@
 package es.uah.peliculasfront.controller;
 
 import es.uah.peliculasfront.model.Critica;
+import es.uah.peliculasfront.model.Pelicula;
 import es.uah.peliculasfront.model.Usuario;
 import es.uah.peliculasfront.paginator.PageRender;
 import es.uah.peliculasfront.service.ICriticasService;
+import es.uah.peliculasfront.service.IPeliculasService;
 import es.uah.peliculasfront.service.IUsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,9 @@ public class CriticasController {
     @Autowired
     IUsuariosService usuariosService;
 
+    @Autowired
+    IPeliculasService peliculasService;
+
     @GetMapping("/listado")
     public String listadoCriticas(Model model, @RequestParam(name="page", defaultValue="0") int page) {
         Pageable pageable = PageRequest.of(page, 5);
@@ -33,7 +38,26 @@ public class CriticasController {
         model.addAttribute("titulo", "Listado de todas las críticas");
         model.addAttribute("listadoCriticas", listado);
         model.addAttribute("page", pageRender);
-        return "usuarios/listCritica";
+        return "views/usuarios/listCritica";
+    }
+
+
+    @GetMapping("/{idPelicula}")
+    public String criticasDeUnaPelicula(Model model,
+                                        @RequestParam(name="page", defaultValue="0") int page,
+                                        @PathVariable("idPelicula") Integer idPelicula ){
+
+
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<Critica> listado = criticasService.buscarCriticasPorIdPelicula(idPelicula,pageable);
+        PageRender<Critica> pageRender = new PageRender<Critica>("/criticas/{idPelicula}", listado);
+        Pelicula pelicula = peliculasService.buscarPeliculaPorId(idPelicula);
+        model.addAttribute("película", pelicula);
+        model.addAttribute("titulo", "Críticas de la película: " + pelicula.getTitulo());
+        model.addAttribute("listadoCriticas", listado);
+        model.addAttribute("page", pageRender);
+        return "views/usuarios/criticasPeli";
+
     }
 
     @GetMapping("/nuevo")
@@ -41,7 +65,7 @@ public class CriticasController {
         Critica critica = new Critica();
         model.addAttribute("titulo", "Nueva critica");
         model.addAttribute("critica", critica);
-        return "usuarios/formCritica";
+        return "views/usuarios/formCritica";
     }
 
     @PostMapping("/guardar/")
@@ -52,8 +76,8 @@ public class CriticasController {
         return "redirect:/matriculas/listado";
     }
 
-    @GetMapping("/criticar/{idCurso}")
-    public String matricular(@PathVariable("idCurso") Integer idPelicula, RedirectAttributes attributes, Principal principal) {
+    @GetMapping("/criticar/{idPelicula}")
+    public String matricular(@PathVariable("idPelicula") Integer idPelicula, RedirectAttributes attributes, Principal principal) {
         /** TERMINAR MÉTODO
         Usuario usuario = usuariosService.buscarUsuarioPorCorreo(principal.getName());
         Critica critica = new Critica(idPelicula, usuario);
@@ -82,7 +106,7 @@ public class CriticasController {
             attributes.addFlashAttribute("msg", "Crítica no encontrada!");
         }
 
-        return "redirect:/matriculas/listado";
+        return "redirect:/criticas/listado";
     }
 
 }

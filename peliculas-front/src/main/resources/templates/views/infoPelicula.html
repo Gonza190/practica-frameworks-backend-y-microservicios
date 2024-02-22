@@ -24,12 +24,16 @@
             <p class="fw-bold">Género: <span class="fw-normal" th:text="*{pelicula.getGenero()}"></span></p>
             <p class="fw-bold">Sinopsis: <span class="fw-normal" th:text="*{pelicula.getSinopsis()}"></span></p>
             <p class="fw-bold">Actores: <span class="fw-normal" th:text="*{actores}"></span></p>
+            <p class="fw-bold">Nota media de los usuarios: <span class="fw-normal" th:text="*{nota}"></span></p>
+
         </div>
         <div style="flex: 1; padding-left: 100px">
             <img th:src="@{'/peliculas/uploads/' + ${pelicula.getPortada()}}"  style="max-height: 450px"/>
         </div>
     </div>
     <a class="btn btn-primary" role="button" th:href="@{/}">Ir a Inicio</a>
+    <a class="btn btn-primary" role="button" th:href="@{'/criticas/' + ${pelicula.getId()}}">Ver las críticas</a>
+
 
 </div>
 

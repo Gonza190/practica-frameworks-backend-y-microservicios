@@ -1,7 +1,10 @@
 package es.uah.peliculasfront.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Rol {
 
+    @JsonProperty("id")
     private Integer idRol;
 
     private String authority;

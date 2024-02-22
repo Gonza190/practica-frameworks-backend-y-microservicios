@@ -32,18 +32,18 @@ public class UsuariosController {
         Usuario usuario = usuariosService.buscarUsuarioPorId(id);
         model.addAttribute("usuario", usuario);
         model.addAttribute("titulo", "Detalle del usuario: " + usuario.getNombre());
-        return "usuarios/verUsuario";
+        return "views/usuarios/verUsuario";
     }
 
     @GetMapping("/listado")
     public String listadoUsuarios(Model model, @RequestParam(name="page", defaultValue="0") int page) {
         Pageable pageable = PageRequest.of(page, 5);
         Page<Usuario> listado = usuariosService.buscarTodos(pageable);
-        PageRender<Usuario> pageRender = new PageRender<Usuario>("/cusuarios/listado", listado);
+        PageRender<Usuario> pageRender = new PageRender<Usuario>("/usuarios/listado", listado);
         model.addAttribute("titulo", "Listado de todos los usuarios");
         model.addAttribute("listadoUsuarios", listado);
         model.addAttribute("page", pageRender);
-        return "usuarios/listUsuario";
+        return "views/usuarios/listUsuario";
     }
 
     @GetMapping("/nuevo")
@@ -53,7 +53,7 @@ public class UsuariosController {
         model.addAttribute("allRoles", roles);
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
-        return "usuarios/formUsuario";
+        return "views/usuarios/formUsuario";
     }
 
     @PostMapping("/guardar/")
@@ -61,14 +61,14 @@ public class UsuariosController {
         //si existe un usuario con el mismo correo no lo guardamos
         if (usuariosService.buscarUsuarioPorCorreo(usuario.getCorreo())!=null) {
             attributes.addFlashAttribute("msga", "Error al guardar, ya existe el correo!");
-            return "redirect:/cusuarios/listado";
+            return "redirect:/usuarios/listado";
         }
         List<Rol> roles = rolesService.buscarTodos();
         model.addAttribute("allRoles", roles);
         usuariosService.guardarUsuario(usuario);
         model.addAttribute("titulo", "Nuevo usuario");
         attributes.addFlashAttribute("msg", "Los datos del usuario fueron guardados!");
-        return "redirect:/cusuarios/listado";
+        return "redirect:/usuarios/listado";
     }
 
     @PostMapping("/registrar")
@@ -101,7 +101,14 @@ public class UsuariosController {
         model.addAttribute("usuario", usuario);
         List<Rol> roles = rolesService.buscarTodos();
         model.addAttribute("allRoles", roles);
-        return "usuarios/formUsuario";
+        return "views/usuarios/editarUsuario";
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizarUsuario(Usuario usuario, RedirectAttributes attributes){
+        usuariosService.guardarUsuario(usuario);
+        attributes.addFlashAttribute("msg", "Los datos del usuario" + usuario.getNombre() + "fueron editados!");
+        return "redirect:/usuarios/listado";
     }
 
     @GetMapping("/borrar/{id}")
@@ -114,7 +121,7 @@ public class UsuariosController {
             attributes.addFlashAttribute("msg", "Usuario no encontrado!");
         }
 
-        return "redirect:/cusuarios/listado";
+        return "redirect:/usuarios/listado";
     }
 
 }

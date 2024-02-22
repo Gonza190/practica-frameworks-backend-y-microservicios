@@ -1,21 +1,32 @@
 package es.uah.peliculasfront.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Usuario {
 
-    private Integer idUsuario;
-    private String nombre;
-    private String clave;
+    //He tenido que poner @JsonProperty a
+    //algunos campos aunque tuvieran el mismo
+    //nombre que en el otro microservicio
+
+    @JsonProperty("id")
+    private Integer id;
+
+    @JsonProperty("username")
+    private String username;
+
+    @JsonProperty("password")
+    private String password;
     private String correo;
     private boolean enable;
     private List<Rol> roles;
     private List<Critica> criticas;
 
-    public Usuario(Integer idUsuario, String nombre, String clave, String correo, boolean enable, List<Rol> roles, List<Critica> criticas) {
-        this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.clave = clave;
+    public Usuario(Integer id, String username, String password, String correo, boolean enable, List<Rol> roles, List<Critica> criticas) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
         this.correo = correo;
         this.enable = enable;
         this.roles = roles;
@@ -26,27 +37,27 @@ public class Usuario {
     }
 
     public Integer getIdUsuario() {
-        return idUsuario;
+        return id;
     }
 
     public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+        this.id = idUsuario;
     }
 
     public String getNombre() {
-        return nombre;
+        return username;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.username = nombre;
     }
 
     public String getClave() {
-        return clave;
+        return password;
     }
 
     public void setClave(String clave) {
-        this.clave = clave;
+        this.password = clave;
     }
 
     public String getCorreo() {
@@ -77,7 +88,7 @@ public class Usuario {
         return criticas;
     }
 
-    public void setCriticas(List<Critica> matriculas) {
-        this.criticas = matriculas;
+    public void setCriticas(List<Critica> criticas) {
+        this.criticas = criticas;
     }
 }

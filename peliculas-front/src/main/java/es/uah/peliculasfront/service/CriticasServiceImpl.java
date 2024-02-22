@@ -32,7 +32,7 @@ public class CriticasServiceImpl implements ICriticasService {
     @Autowired
     IPeliculasService peliculasService;
 
-    String url = "http://localhost:8090/api/usuarios/matriculas";
+    String url = "http://localhost:8090/api/usuarios/criticas";
 
     @Override
     public Page<Critica> buscarTodas(Pageable pageable) {
@@ -56,7 +56,7 @@ public class CriticasServiceImpl implements ICriticasService {
 
     @Override
     public Page<Critica> buscarCriticasPorIdPelicula(Integer idPelicula, Pageable pageable) {
-        Critica[] criticas = template.getForObject(url+"/peliculas/"+idPelicula, Critica[].class);
+        Critica[] criticas = template.getForObject(url+"/pelicula/"+idPelicula, Critica[].class);
         List<Critica> criticasList = Arrays.asList(criticas);
 
         int pageSize = pageable.getPageSize();
