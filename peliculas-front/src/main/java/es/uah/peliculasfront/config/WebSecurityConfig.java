@@ -34,6 +34,13 @@ public class WebSecurityConfig {
                         .defaultSuccessUrl("/home", true))
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/js/**", "/css/**", "/login", "/usuarios/registrar").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/peliculas/gestion").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/peliculas/alta").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/actores/gestion").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/actores/alta").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/asociar").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/usuarios/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/criticas/listado").hasAnyAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 );
         return http.build();

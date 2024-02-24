@@ -77,30 +77,17 @@ public class CriticasController {
 
     @PostMapping("/guardar/")
     public String guardarCritica(Model model, Critica critica, RedirectAttributes attributes,
-                                 @RequestParam("idPeli") int idPelicula) {
+                                 @RequestParam("idPeli") int idPelicula,
+                                 Principal principal) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Critica c = criticasService.buscarCriticaPorId(1);
-
-
-        critica.setFecha(c.getFecha());
+        Usuario usuario = usuariosService.buscarUsuarioPorCorreo(principal.getName());
+        critica.setUsuario(usuario);
+        critica.setFecha(LocalDate.now());
         critica.setIdPelicula(idPelicula);
         String resultado = criticasService.guardarCritica(critica);
         model.addAttribute("titulo", "Nueva critica");
         attributes.addFlashAttribute("msg", resultado);
-        return "redirect:/criticas/listado";
-    }
-
-    @GetMapping("/criticar/{idPelicula}")
-    public String matricular(@PathVariable("idPelicula") Integer idPelicula, RedirectAttributes attributes, Principal principal) {
-        /** TERMINAR MÉTODO
-        Usuario usuario = usuariosService.buscarUsuarioPorCorreo(principal.getName());
-        Critica critica = new Critica(idPelicula, usuario);
-        String resultado = criticasService.guardarCritica(critica);
-        attributes.addFlashAttribute("msg", resultado);
-         */
-        return "redirect:/peliculas";
+        return "redirect:/criticas/" + idPelicula;
     }
 
     @GetMapping("/editar/{id}")

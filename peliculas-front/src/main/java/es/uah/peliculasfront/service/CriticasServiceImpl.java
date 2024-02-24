@@ -88,12 +88,21 @@ public class CriticasServiceImpl implements ICriticasService {
 
         } else {
 
-            Usuario usuario = usuariosService.buscarUsuarioPorId(critica.getUsuario().getIdUsuario());
-            critica.setUsuario(usuario);
+            //Usuario usuario = usuariosService.buscarUsuarioPorId(critica.getUsuario().getIdUsuario());
+            //critica.setUsuario(usuario);
+
+            //Comproabr si existe ya la crítica
+            if(critica.getUsuario().getCriticas().size()>0){
+                for (int i=0;i<critica.getUsuario().getCriticas().size();i++){
+                    if(critica.getUsuario().getCriticas().get(i).getIdPelicula() == critica.getIdPelicula()){
+                        return "Ya existe esa crítica";
+                    }
+                }
+            }
             critica.setIdCritica(0);
             template.postForObject(url, critica, String.class);
-        }
 
+        }
 
         return "Crítica guardada";
     }
